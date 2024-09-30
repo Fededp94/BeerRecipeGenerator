@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useNavigate } from "react-router-dom";
+
 import logo from "../assets/Logo Definitivo.png";
 import "../App.css";
 import "../HomePage.css";
@@ -16,6 +18,7 @@ const HomePage = () => {
   });
   const [logoOpacity, setLogoOpacity] = useState(0);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate(); // Corretto qui
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -54,6 +57,11 @@ const HomePage = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  // Usa navigate per il reindirizzamento
+  const handleProceedClick = () => {
+    navigate("/play"); // Correzione: reindirizza alla pagina PlayPage
+  };
 
   return (
     <div className="container-fluid p-0" style={{ backgroundColor: "#f0f0f0" }}>
@@ -147,7 +155,8 @@ const HomePage = () => {
             fontSize: "2rem",
             color: "white",
             backgroundColor: "#333333",
-          }}>
+          }}
+          onClick={handleProceedClick}>
           ORA PUOI PROCEDERE
         </button>
       )}
