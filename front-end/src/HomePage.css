@@ -1,0 +1,37 @@
+h1 {
+  font-size: 15vh;
+  font-weight: 300;
+  color: #333333;
+  margin-top: -15%;
+  margin-bottom: -10%;
+}
+
+img {
+  margin-top: -10%;
+  margin-bottom: -10%;
+}
+
+button {
+  font-family: Teko;
+}
+
+/* Dropdown in posizione assoluta */
+.custom-dropdown {
+  position: absolute;
+  top: 100%; /* Posiziona il menu sotto il pulsante */
+  left: 0;
+  background-color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 10px;
+  display: none; /* Inizialmente nascosto */
+  z-index: 1000;
+  width: 200px; /* Larghezza fissa per il dropdown */
+  max-height: 300px; /* Limita l'altezza massima */
+  overflow-y: auto; /* Aggiungi scorrimento se supera l'altezza */
+}
+
+/* Mostra il dropdown solo se è aperto */
+.custom-dropdown.open {
+  display: block;
+}
