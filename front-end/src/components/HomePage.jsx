@@ -18,7 +18,7 @@ const HomePage = () => {
   });
   const [logoOpacity, setLogoOpacity] = useState(0);
   const dropdownRef = useRef(null);
-  const navigate = useNavigate(); // Corretto qui
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -58,9 +58,8 @@ const HomePage = () => {
     };
   }, []);
 
-  // Usa navigate per il reindirizzamento
   const handleProceedClick = () => {
-    navigate("/play"); // Correzione: reindirizza alla pagina PlayPage
+    navigate("/play"); // reindirizzazione pagina PlayPage
   };
 
   return (
@@ -87,10 +86,10 @@ const HomePage = () => {
                   className="dropdown-menu show"
                   style={{
                     position: "absolute",
-                    top: "100%", // Posiziona il dropdown subito sotto il bottone
+                    top: "100%",
                     left: 0,
                     zIndex: 1000,
-                    backgroundColor: "#fff", // Colore di sfondo del dropdown
+                    backgroundColor: "#fff",
                     border: "1px solid rgba(0, 0, 0, 0.15)",
                     width: "auto",
                   }}>

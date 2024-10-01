@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
-import "../PlayPage.css"; // Assicurati di creare questo file per lo stile
-import beerImage from "../assets/Pinta.png"; // Immagine della pinta di birra
+import "../PlayPage.css";
+import beerImage from "../assets/Pinta.png";
 
 const PlayPage = () => {
   const [regoleOpen, setRegoleOpen] = useState(false);
@@ -10,7 +10,7 @@ const PlayPage = () => {
   const [selectedHops, setSelectedHops] = useState([]);
   const [selectedYeast, setSelectedYeast] = useState(null);
 
-  // Esempio di opzioni (puoi sostituirle con dati dal database)
+  // Da sostituire con dati database
   const maltsOptions = ["Malto Chiaro", "Malto Scuro", "Malto Rosso"];
   const hopsOptions = ["Luppolo Amarillo", "Luppolo Cascade", "Luppolo Simcoe"];
   const yeastOptions = ["Lievito Ale", "Lievito Lager"];
@@ -104,7 +104,7 @@ const PlayPage = () => {
           }}>
           <div
             style={{
-              width: "250px", // Dimensione aumentata della pinta
+              width: "250px",
               height: "400px",
               backgroundColor: getBeerColor(),
               borderRadius: "10px",
