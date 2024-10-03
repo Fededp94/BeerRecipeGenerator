@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from "./components/react/HomePage";
-import PlayPage from "./components/react/PlayPage";
+import HomePage from "./components/react/HomePage.jsx";
+import PlayPage from "./components/react/PlayPage.jsx";
 
 const App = () => {
   return (

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../App.css";
-import "./css/PlayPage.css";
-import beerImage from "../assets/Pinta.png";
+import "../../App.css";
+import "../css/PlayPage.css";
+import beerImage from "../../assets/Pinta.png";
 
 const PlayPage = () => {
   const [regoleOpen, setRegoleOpen] = useState(false);

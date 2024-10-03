@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 
-import logo from "../assets/Logo Definitivo.png";
-import "../App.css";
-import "./css/HomePage.css";
+import logo from "../../assets/Logo Definitivo.png";
+import "../../App.css";
+import "../css/HomePage.css";
 
 const HomePage = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
