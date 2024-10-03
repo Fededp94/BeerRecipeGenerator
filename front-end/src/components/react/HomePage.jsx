@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import logo from "../assets/Logo Definitivo.png";
 import "../App.css";
-import "../HomePage.css";
+import "./css/HomePage.css";
 
 const HomePage = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -117,7 +117,8 @@ const HomePage = () => {
         }}>
         <h1
           className="text-black mb-1"
-          style={{ fontFamily: "Teko", fontSize: "6rem" }}>
+          /* style={{ fontFamily: "Teko", fontSize: "6rem" }} */
+        >
           BEER RECIPE GENERATOR
         </h1>
 

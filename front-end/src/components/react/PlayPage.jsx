@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
-import "../PlayPage.css";
+import "./css/PlayPage.css";
 import beerImage from "../assets/Pinta.png";
 
 const PlayPage = () => {
@@ -43,7 +43,7 @@ const PlayPage = () => {
     setSelectedYeast(lievito);
   };
 
-  // Funzione per determinare il colore della birra
+  // Funzione per colore birra
   const getBeerColor = () => {
     if (selectedMalts.includes("Malto Scuro")) return "brown"; // Colore scuro
     if (selectedMalts.includes("Malto Rosso")) return "red"; // Colore rosso
