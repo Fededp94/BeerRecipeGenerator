@@ -72,21 +72,15 @@
 
 .pinta-container {
   position: absolute;
+  margin-left: -30%;
   right: 20%;
   top: 25%;
 }
 
-.beer-image {
-  width: 50vh;
-  height: 80vh;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
 .dropdown-content ul {
   list-style: none; /* Rimuove i puntini */
-  padding: 0; /* Rimuove il padding */
-  margin: 0; /* Rimuove il margine */
+  padding: 0;
+  margin: 0;
 }
 
 .dropdown-content li {
@@ -95,9 +89,25 @@
 
 .dropdown-content a {
   text-decoration: none;
-  color: black; /* Cambia il colore del testo */
+  color: black; /* Cambio il colore del testo */
 }
 
 .dropdown-content a:hover {
-  color: #007bff; /* Cambia colore quando ci passi sopra */
+  color: #007bff; /* Cambia colore quando ci passo sopra */
+  background-color: #333333;
+}
+
+.selected {
+  background-color: green; /* Colore di sfondo verde per i malti selezionati */
+  color: white; /* Colore del testo bianco */
+}
+/* Contenitore immagine pinta */
+.beer-glass {
+  width: 50%;
+  height: 80vh;
+  object-fit: contain;
+  position: relative;
+  top: 0;
+  left: 0;
+  margin: 5vh;
 }

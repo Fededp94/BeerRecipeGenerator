@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../App.css";
 import "../css/PlayPage.css";
-import beerImage from "../../assets/Pinta.png";
+import pintaImage from "../../assets/PintaVuota.png";
+import pintaChiaraImage from "../../assets/Pinta.png";
+import pintaAmbrataImage from "../../assets/PintaAmbrata.png";
+import pintaScuraImage from "../../assets/PintaScura.png";
 
 const PlayPage = () => {
   const [regoleOpen, setRegoleOpen] = useState(false);
@@ -28,6 +31,30 @@ const PlayPage = () => {
       malts: ["Abbey", "Carafa III", "Chocolate"],
     },
   ];
+
+  // Funzione per determinare l'immagine da visualizzare
+  const getBeerImage = () => {
+    const hasLightMalts = selectedMalts.some((malto) =>
+      ["Malto Wheat", "Pilsner", "Pale Ale"].includes(malto)
+    );
+    const hasAmberMalts = selectedMalts.some((malto) =>
+      ["Vienna", "Monaco", "Caramel"].includes(malto)
+    );
+    const hasDarkMalts = selectedMalts.some((malto) =>
+      ["Abbey", "Carafa III", "Chocolate"].includes(malto)
+    );
+
+    if (hasDarkMalts) {
+      return pintaScuraImage; // Mi mostra la pinta scura
+    }
+    if (hasAmberMalts) {
+      return pintaAmbrataImage; // Mi mostra la pinta ambrata
+    }
+    if (hasLightMalts) {
+      return pintaChiaraImage; // Mi mostra la pinta chiara
+    }
+    return pintaImage; // Mi mostra la pinta vuota
+  };
 
   // Opzioni per i luppoli
   const hopsOptions = [
@@ -147,7 +174,7 @@ const PlayPage = () => {
 
       <div
         className="d-flex justify-content-between align-items-center"
-        style={{ minHeight: "100vh", padding: "20px" }}>
+        style={{ minHeight: "100vh", padding: "20px", position: "abosolute" }}>
         <div className="buttons-container">
           <div className="dropdown">
             <button
@@ -163,7 +190,17 @@ const PlayPage = () => {
                     <ul>
                       {malto.malts.map((m) => (
                         <li key={m}>
-                          <a href="#" onClick={() => handleMaltsChange(m)}>
+                          <a
+                            href="#"
+                            onClick={() => handleMaltsChange(m)}
+                            style={{
+                              color: selectedMalts.includes(m)
+                                ? "green"
+                                : "black",
+                              fontWeight: selectedMalts.includes(m)
+                                ? "bold"
+                                : "normal",
+                            }}>
                             {m}
                           </a>
                         </li>
@@ -228,11 +265,7 @@ const PlayPage = () => {
           </div>
         </div>
 
-        <div className="pinta-container">
-          <div>
-            <img src={beerImage} alt="Pinta di Birra" className="beer-image" />
-          </div>
-        </div>
+        <img src={getBeerImage()} alt="Pinta di birra" className="beer-glass" />
       </div>
     </div>
   );
