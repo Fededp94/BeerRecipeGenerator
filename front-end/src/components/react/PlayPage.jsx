@@ -180,9 +180,10 @@ const PlayPage = () => {
             <button
               className="btn malts-btn"
               onClick={() => toggleDropdown("malts")}>
-              Malto
+              MALTI
             </button>
-            {showMaltsDropdown && (
+
+            {showMaltsDropdown && ( // Inizio selezione malti
               <div className="dropdown-content show">
                 {maltsOptions.map((malto) => (
                   <div key={malto.type}>
@@ -193,14 +194,9 @@ const PlayPage = () => {
                           <a
                             href="#"
                             onClick={() => handleMaltsChange(m)}
-                            style={{
-                              color: selectedMalts.includes(m)
-                                ? "green"
-                                : "black",
-                              fontWeight: selectedMalts.includes(m)
-                                ? "bold"
-                                : "normal",
-                            }}>
+                            className={
+                              selectedMalts.includes(m) ? "selected" : ""
+                            }>
                             {m}
                           </a>
                         </li>
@@ -216,7 +212,7 @@ const PlayPage = () => {
             <button
               className="btn hops-btn"
               onClick={() => toggleDropdown("hops")}>
-              Luppoli
+              LUPPOLI
             </button>
             {showHopsDropdown && (
               <div className="dropdown-content show">
@@ -226,7 +222,12 @@ const PlayPage = () => {
                     <ul>
                       {hop.hops.map((h) => (
                         <li key={h}>
-                          <a href="#" onClick={() => handleHopsChange(h)}>
+                          <a
+                            href="#"
+                            onClick={() => handleHopsChange(h)}
+                            className={
+                              selectedHops.includes(h) ? "selected" : ""
+                            }>
                             {h}
                           </a>
                         </li>
@@ -242,7 +243,7 @@ const PlayPage = () => {
             <button
               className="btn yeast-btn"
               onClick={() => toggleDropdown("yeast")}>
-              Lievito
+              LIEVITI
             </button>
             {showYeastDropdown && (
               <div className="dropdown-content show">
@@ -252,7 +253,10 @@ const PlayPage = () => {
                     <ul>
                       {yeast.yeast.map((y) => (
                         <li key={y}>
-                          <a href="#" onClick={() => handleYeastChange(y)}>
+                          <a
+                            href="#"
+                            onClick={() => handleYeastChange(y)}
+                            className={selectedYeast === y ? "selected" : ""}>
                             {y}
                           </a>
                         </li>

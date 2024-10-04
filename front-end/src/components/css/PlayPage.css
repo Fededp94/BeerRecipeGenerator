@@ -21,10 +21,11 @@
 .malts-btn,
 .hops-btn,
 .yeast-btn {
-  width: 150px;
+  width: 300px;
   height: 100px;
   margin: 10px;
   font-size: 1.2rem;
+  font-weight: 600;
   background-color: #333333;
   color: white;
   font-size: xx-large;
@@ -34,12 +35,14 @@
 .dropdown-content {
   display: none;
   position: absolute;
+  margin-left: 1.5vh;
   background-color: #f9f9f9;
-  min-width: 160px;
+  border-color: solid 5px #333333;
+  min-width: 42.5vh;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
-
+/* Dropdown tendina luppoli e lievito */
 .dropdown-content a {
   color: black;
   padding: 12px 16px;
@@ -47,9 +50,18 @@
   display: block;
 }
 
+.dropdown-content a {
+  text-decoration: none;
+  color: black;
+}
+
 .dropdown-content a:hover {
-  background-color: #f1f1f1;
-  border: solid 2px black;
+  background-color: #333333;
+  color: white;
+}
+
+.dropdown-content li {
+  margin-bottom: 5px; /* Aggiunge un po' di spazio tra le opzioni */
 }
 
 /* Mostrare il dropdown al click */
@@ -59,7 +71,7 @@
 
 /* Layout generale */
 #play-page-container {
-  position: relative;
+  position: absolute;
 }
 
 .buttons-container {
@@ -78,28 +90,13 @@
 }
 
 .dropdown-content ul {
-  list-style: none; /* Rimuove i puntini */
+  list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.dropdown-content li {
-  margin-bottom: 5px; /* Aggiunge un po' di spazio tra le opzioni */
-}
-
-.dropdown-content a {
-  text-decoration: none;
-  color: black; /* Cambio il colore del testo */
-}
-
-.dropdown-content a:hover {
-  color: #007bff; /* Cambia colore quando ci passo sopra */
-  background-color: #333333;
-}
-
 .selected {
-  background-color: green; /* Colore di sfondo verde per i malti selezionati */
-  color: white; /* Colore del testo bianco */
+  background-color: #36ff00; /* Colore di sfondo verde per i malti selezionati */
 }
 /* Contenitore immagine pinta */
 .beer-glass {
