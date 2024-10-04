@@ -269,6 +269,11 @@ const PlayPage = () => {
           </div>
         </div>
 
+        {/* Pulsante Generate! */}
+        <div className="generate-button-container">
+          <button className="btn generate-btn">Generate!</button>
+        </div>
+
         <img src={getBeerImage()} alt="Pinta di birra" className="beer-glass" />
       </div>
     </div>
