@@ -53,6 +53,8 @@
   background-color: #333333;
   color: white;
   font-size: xx-large;
+  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.3),
+    inset 0px -2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Dropdown per i pulsanti */
@@ -85,7 +87,7 @@
 }
 
 .dropdown-content li {
-  margin-bottom: 5px; /* Aggiunge un po' di spazio tra le opzioni */
+  margin-bottom: 5px; /* Aggiungo un po' di spazio tra le opzioni */
 }
 
 /* Mostrare il dropdown al click */
@@ -135,21 +137,42 @@
 
 /* Pulsante Generate! */
 .generate-container {
-  text-align: center;
-  margin-top: 20px;
+  position: absolute;
+  margin-left: 47%;
+  margin-top: 20%;
+  min-width: 20%;
 }
 
 .generate-btn {
-  background-color: #28a745;
+  background-color: #333333;
   color: white;
-  padding: 10px 20px;
-  border: none;
+  min-width: 70%;
+  min-height: 15vh;
   border-radius: 5px;
-  font-size: 18px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: xx-large;
+  border: none;
+  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.3),
+    inset 0px -2px 4px rgba(0, 0, 0, 0.1); /* Ombra esterna e interna */
+  background: linear-gradient(145deg, #333333, #333333); /* Colore 3D */
+  transition: all 0.2s ease-in-out; /* Effetto di transizione */
 }
 
 .generate-btn:hover {
-  background-color: #218838;
+  background: rgb(35, 194, 43);
+  background: -moz-radial-gradient(
+    circle,
+    rgba(35, 194, 43, 1) 55%,
+    rgba(0, 105, 0, 1) 100%
+  );
+  background: -webkit-radial-gradient(
+    circle,
+    rgba(35, 194, 43, 1) 55%,
+    rgba(0, 105, 0, 1) 100%
+  );
+  background: radial-gradient(
+    circle,
+    rgba(35, 194, 43, 1) 55%,
+    rgba(0, 105, 0, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#23c22b",endColorstr="#006900",GradientType=1);
 }

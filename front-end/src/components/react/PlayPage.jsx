@@ -268,7 +268,7 @@ const PlayPage = () => {
         {/* Pulsante "Generate!" */}
         <div className="generate-container">
           <button className="btn generate-btn" onClick={handleGenerateClick}>
-            Generate!
+            Genera!
           </button>
         </div>
       </div>
