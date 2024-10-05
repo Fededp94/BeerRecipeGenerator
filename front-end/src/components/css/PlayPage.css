@@ -87,10 +87,10 @@
 }
 
 .dropdown-content li {
-  margin-bottom: 5px; /* Aggiungo un po' di spazio tra le opzioni */
+  margin-bottom: 5px;
 }
 
-/* Mostrare il dropdown al click */
+/* Mostra il dropdown al click */
 .show {
   display: block;
 }
@@ -122,7 +122,7 @@
 }
 
 .selected {
-  background-color: #36ff00; /* Colore di sfondo verde per i malti selezionati */
+  background-color: #36ff00;
 }
 /* Contenitore immagine pinta */
 .beer-glass {
@@ -187,10 +187,10 @@
   background-color: #f8d7da;
   border-color: #f5c6cb;
   color: #721c24;
-  width: 70%; /* Larghezza fissa */
-  max-width: 100%; /* Larghezza massima per responsività */
-  min-height: 10%; /* Altezza minima */
-  font-size: 1rem; /* Dimensione del testo */
+  width: 70%;
+  max-width: 100%;
+  min-height: 10%;
+  font-size: 1rem;
   line-height: 1.4;
 }
 
