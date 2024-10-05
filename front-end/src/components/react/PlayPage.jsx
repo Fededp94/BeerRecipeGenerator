@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import per la navigazione
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../App.css";
 import "../css/PlayPage.css";
@@ -8,6 +9,8 @@ import pintaAmbrataImage from "../../assets/PintaAmbrata.png";
 import pintaScuraImage from "../../assets/PintaScura.png";
 
 const PlayPage = () => {
+  const navigate = useNavigate(); // Hook per la navigazione
+
   const [regoleOpen, setRegoleOpen] = useState(false);
   const [showMaltsDropdown, setShowMaltsDropdown] = useState(false);
   const [showHopsDropdown, setShowHopsDropdown] = useState(false);
@@ -15,21 +18,13 @@ const PlayPage = () => {
   const [selectedMalts, setSelectedMalts] = useState([]);
   const [selectedHops, setSelectedHops] = useState([]);
   const [selectedYeast, setSelectedYeast] = useState(null);
+  const [beerName, setBeerName] = useState(""); // Nuovo stato per il nome della birra
 
   // Opzioni per i malti
   const maltsOptions = [
-    {
-      type: "Malto Chiaro",
-      malts: ["Malto Wheat", "Pilsner", "Pale Ale"],
-    },
-    {
-      type: "Malto Ambrato",
-      malts: ["Vienna", "Monaco", "Caramel"],
-    },
-    {
-      type: "Malto Scuro",
-      malts: ["Abbey", "Carafa III", "Chocolate"],
-    },
+    { type: "Malto Chiaro", malts: ["Malto Wheat", "Pilsner", "Pale Ale"] },
+    { type: "Malto Ambrato", malts: ["Vienna", "Monaco", "Caramel"] },
+    { type: "Malto Scuro", malts: ["Abbey", "Carafa III", "Chocolate"] },
   ];
 
   // Funzione per determinare l'immagine da visualizzare
@@ -44,16 +39,10 @@ const PlayPage = () => {
       ["Abbey", "Carafa III", "Chocolate"].includes(malto)
     );
 
-    if (hasDarkMalts) {
-      return pintaScuraImage; // Mi mostra la pinta scura
-    }
-    if (hasAmberMalts) {
-      return pintaAmbrataImage; // Mi mostra la pinta ambrata
-    }
-    if (hasLightMalts) {
-      return pintaChiaraImage; // Mi mostra la pinta chiara
-    }
-    return pintaImage; // Mi mostra la pinta vuota
+    if (hasDarkMalts) return pintaScuraImage;
+    if (hasAmberMalts) return pintaAmbrataImage;
+    if (hasLightMalts) return pintaChiaraImage;
+    return pintaImage;
   };
 
   // Opzioni per i luppoli
@@ -62,26 +51,14 @@ const PlayPage = () => {
       type: "Luppoli Base",
       hops: ["Saaz", "Styrian Golding", "Hallertau Magnum"],
     },
-    {
-      type: "Luppoli Agrumati",
-      hops: ["Citra", "Hbc-630", "Wakatu"],
-    },
-    {
-      type: "Luppoli Fruttati",
-      hops: ["Wai-ti", "Mosaic", "Vic Secret"],
-    },
+    { type: "Luppoli Agrumati", hops: ["Citra", "Hbc-630", "Wakatu"] },
+    { type: "Luppoli Fruttati", hops: ["Wai-ti", "Mosaic", "Vic Secret"] },
   ];
 
   // Opzioni per i lieviti
   const yeastOptions = [
-    {
-      type: "Lievito Ale (Alta Fermentazione)",
-      yeast: ["US-05"],
-    },
-    {
-      type: "Lievito lager ( Bassa Fermentazione)",
-      yeast: ["Saflager w34/70"],
-    },
+    { type: "Lievito Ale (Alta Fermentazione)", yeast: ["US-05"] },
+    { type: "Lievito lager (Bassa Fermentazione)", yeast: ["Saflager w34/70"] },
   ];
 
   const toggleRegole = () => setRegoleOpen(!regoleOpen);
@@ -112,19 +89,33 @@ const PlayPage = () => {
     setSelectedYeast(lievito);
   };
 
-  const getBeerColor = () => {
-    if (selectedMalts.includes("Malto Scuro")) return "brown";
-    if (selectedMalts.includes("Malto Ambrato")) return "amber";
-    return "gold";
+  // Funzione per gestire il click sul pulsante Generate
+  const handleGenerateClick = () => {
+    navigate("/result", {
+      state: {
+        malts: selectedMalts,
+        hops: selectedHops,
+        yeast: selectedYeast,
+        beerName: beerName,
+      },
+    });
   };
 
   return (
-    <div
-      id="play-page-container"
-      className="container-fluid p-0"
-      style={{ backgroundColor: "#f0f0f0" }}>
+    <div id="play-page-container" className="container-fluid p-0 play-page-bg">
       <header className="bg-dark text-white py-2">
-        <nav className="container d-flex justify-content-end navbar">
+        <nav className="container d-flex justify-content-between navbar">
+          {/* Input per il nome della birra */}
+          <div className="beer-name-input">
+            <input
+              type="text"
+              placeholder="Il nome della tua birra!"
+              className={beerName ? "input-filled" : "input-empty"}
+              value={beerName}
+              onChange={(e) => setBeerName(e.target.value)}
+            />
+          </div>
+          {/* Dropdown per le regole */}
           <ul className="navbar-nav d-flex flex-row">
             <li className="nav-item dropdown mx-2">
               <a
@@ -173,17 +164,17 @@ const PlayPage = () => {
       </header>
 
       <div
-        className="d-flex justify-content-between align-items-center"
-        style={{ minHeight: "100vh", padding: "20px", position: "abosolute" }}>
+        className="d-flex justify-content-between align-items-center main-content"
+        style={{ minHeight: "100vh", padding: "20px", position: "relative" }}>
         <div className="buttons-container">
+          {/* Dropdown per Malti */}
           <div className="dropdown">
             <button
               className="btn malts-btn"
               onClick={() => toggleDropdown("malts")}>
               MALTI
             </button>
-
-            {showMaltsDropdown && ( // Inizio selezione malti
+            {showMaltsDropdown && (
               <div className="dropdown-content show">
                 {maltsOptions.map((malto) => (
                   <div key={malto.type}>
@@ -208,6 +199,7 @@ const PlayPage = () => {
             )}
           </div>
 
+          {/* Dropdown per Luppoli */}
           <div className="dropdown">
             <button
               className="btn hops-btn"
@@ -239,6 +231,7 @@ const PlayPage = () => {
             )}
           </div>
 
+          {/* Dropdown per Lieviti */}
           <div className="dropdown">
             <button
               className="btn yeast-btn"
@@ -269,12 +262,15 @@ const PlayPage = () => {
           </div>
         </div>
 
-        {/* Pulsante Generate! */}
-        <div className="generate-button-container">
-          <button className="btn generate-btn">Generate!</button>
-        </div>
-
+        {/* Immagine della pinta */}
         <img src={getBeerImage()} alt="Pinta di birra" className="beer-glass" />
+
+        {/* Pulsante "Generate!" */}
+        <div className="generate-container">
+          <button className="btn generate-btn" onClick={handleGenerateClick}>
+            Generate!
+          </button>
+        </div>
       </div>
     </div>
   );

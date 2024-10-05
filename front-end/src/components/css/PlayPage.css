@@ -17,6 +17,29 @@
   margin-left: -10vh;
 }
 
+/* Input nome birra */
+.beer-name-input {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+  margin-left: 5%;
+  max-width: 50vh;
+}
+
+.beer-name-input:hover {
+  border: solid 2px yellow;
+}
+
+.input-filled {
+  background-color: #fff;
+  border-color: yellow;
+}
+
+.input-empty {
+  background-color: #fff;
+  border-color: yellow;
+}
+
 /* Pulsanti Malti, Luppoli, Lieviti */
 .malts-btn,
 .hops-btn,
@@ -24,6 +47,7 @@
   width: 300px;
   height: 100px;
   margin: 10px;
+  margin-top: 35%;
   font-size: 1.2rem;
   font-weight: 600;
   background-color: #333333;
