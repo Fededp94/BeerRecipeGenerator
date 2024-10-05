@@ -18,7 +18,8 @@ const PlayPage = () => {
   const [selectedMalts, setSelectedMalts] = useState([]);
   const [selectedHops, setSelectedHops] = useState([]);
   const [selectedYeast, setSelectedYeast] = useState(null);
-  const [beerName, setBeerName] = useState(""); // Nuovo stato per il nome della birra
+  const [beerName, setBeerName] = useState(""); // Stato per il nome della birra
+  const [error, setError] = useState(""); // Nuovo stato per il messaggio di errore
 
   // Opzioni per i malti
   const maltsOptions = [
@@ -75,6 +76,7 @@ const PlayPage = () => {
       else if (prev.length < 3) return [...prev, malto];
       return prev;
     });
+    setError(""); // Resetta l'errore quando l'utente seleziona un malto
   };
 
   const handleHopsChange = (luppolo) => {
@@ -83,14 +85,35 @@ const PlayPage = () => {
       else if (prev.length < 4) return [...prev, luppolo];
       return prev;
     });
+    setError(""); // Resetta l'errore quando l'utente seleziona un luppolo
   };
 
   const handleYeastChange = (lievito) => {
     setSelectedYeast(lievito);
+    setError(""); // Resetta l'errore quando l'utente seleziona un lievito
   };
 
-  // Funzione per gestire il click sul pulsante Generate
+  // Funzione aggiornata per gestire il click sul pulsante Generate
   const handleGenerateClick = () => {
+    // Resetta eventuali errori precedenti
+    setError("");
+
+    // Verifico che tutti gli ingredienti necessari siano stati selezionati
+    if (
+      selectedMalts.length === 0 ||
+      selectedHops.length === 0 ||
+      !selectedYeast
+    ) {
+      let errorMessage = "Per favore seleziona:";
+      if (selectedMalts.length === 0) errorMessage += "\n- Almeno un malto";
+      if (selectedHops.length === 0) errorMessage += "\n- Almeno un luppolo";
+      if (!selectedYeast) errorMessage += "\n- Almeno un lievito";
+
+      setError(errorMessage);
+      return; // Esce dalla funzione senza navigare
+    }
+
+    // Se tutti i controlli passano, naviga alla pagina successiva
     navigate("/result", {
       state: {
         malts: selectedMalts,
@@ -105,7 +128,6 @@ const PlayPage = () => {
     <div id="play-page-container" className="container-fluid p-0 play-page-bg">
       <header className="bg-dark text-white py-2">
         <nav className="container d-flex justify-content-between navbar">
-          {/* Input per il nome della birra */}
           <div className="beer-name-input">
             <input
               type="text"
@@ -115,7 +137,6 @@ const PlayPage = () => {
               onChange={(e) => setBeerName(e.target.value)}
             />
           </div>
-          {/* Dropdown per le regole */}
           <ul className="navbar-nav d-flex flex-row">
             <li className="nav-item dropdown mx-2">
               <a
@@ -265,8 +286,13 @@ const PlayPage = () => {
         {/* Immagine della pinta */}
         <img src={getBeerImage()} alt="Pinta di birra" className="beer-glass" />
 
-        {/* Pulsante "Generate!" */}
+        {/* Contenitore per il pulsante Generate e il messaggio di errore */}
         <div className="generate-container">
+          {error && (
+            <div className="alert alert-danger error-message" role="alert">
+              {error}
+            </div>
+          )}
           <button className="btn generate-btn" onClick={handleGenerateClick}>
             Genera!
           </button>

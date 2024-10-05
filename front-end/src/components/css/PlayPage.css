@@ -176,3 +176,26 @@
   );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#23c22b",endColorstr="#006900",GradientType=1);
 }
+
+/* Messaggio di errore */
+.error-message {
+  white-space: pre-line;
+  margin-bottom: 10px;
+  font-size: 14px;
+  padding: 10px 15px;
+  border-radius: 4px;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+  width: 70%; /* Larghezza fissa */
+  max-width: 100%; /* Larghezza massima per responsività */
+  min-height: 10%; /* Altezza minima */
+  font-size: 1rem; /* Dimensione del testo */
+  line-height: 1.4;
+}
+
+.generate-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
