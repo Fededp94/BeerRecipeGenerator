@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import per la navigazione
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../App.css";
 import "../css/PlayPage.css";
@@ -9,7 +9,7 @@ import pintaAmbrataImage from "../../assets/PintaAmbrata.png";
 import pintaScuraImage from "../../assets/PintaScura.png";
 
 const PlayPage = () => {
-  const navigate = useNavigate(); // Hook per la navigazione
+  const navigate = useNavigate(); //Funzione per la navigazione
 
   const [regoleOpen, setRegoleOpen] = useState(false);
   const [showMaltsDropdown, setShowMaltsDropdown] = useState(false);
@@ -18,8 +18,8 @@ const PlayPage = () => {
   const [selectedMalts, setSelectedMalts] = useState([]);
   const [selectedHops, setSelectedHops] = useState([]);
   const [selectedYeast, setSelectedYeast] = useState(null);
-  const [beerName, setBeerName] = useState(""); // Stato per il nome della birra
-  const [error, setError] = useState(""); // Nuovo stato per il messaggio di errore
+  const [beerName, setBeerName] = useState("");
+  const [error, setError] = useState("");
 
   // Opzioni per i malti
   const maltsOptions = [
@@ -93,7 +93,6 @@ const PlayPage = () => {
     setError(""); // Resetta l'errore quando l'utente seleziona un lievito
   };
 
-  // Funzione aggiornata per gestire il click sul pulsante Generate
   const handleGenerateClick = () => {
     // Resetta eventuali errori precedenti
     setError("");
@@ -154,7 +153,7 @@ const PlayPage = () => {
                     <a className="dropdown-item">
                       1. Selezionare i <strong>malti</strong> che si vogliono
                       inserire nella <br /> ricetta cliccando sul pulsante
-                      <strong> Malto</strong>. &#40; Max. 3 &#41;
+                      <strong> Malti</strong>. &#40; Max. 3 &#41;
                     </a>
                   </li>
                   <li>
@@ -168,7 +167,7 @@ const PlayPage = () => {
                     <a className="dropdown-item">
                       3. Scegliere uno dei due <strong>lieviti</strong> proposti
                       cliccando sul
-                      <br /> pulsante <strong> Lievito</strong>. &#40; Max. 1
+                      <br /> pulsante <strong> Lieviti</strong>. &#40; Max. 1
                       &#41;
                     </a>
                   </li>
