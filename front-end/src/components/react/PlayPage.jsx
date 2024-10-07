@@ -102,17 +102,15 @@ const PlayPage = () => {
       hops: [
         {
           name: "Saaz",
-          description:
-            "Saaz è un luppolo aromatico con note erbacee e speziate",
+          description: "Luppolo aromatico con note erbacee e speziate",
         },
         {
           name: "Styrian Golding",
-          description:
-            "Styrian Golding è noto per il suo profilo floreale e dolce",
+          description: "Noto per il suo profilo floreale e dolce",
         },
         {
           name: "Hallertau Magnum",
-          description: "Hallertau Magnum offre un amaro pulito e secco",
+          description: "Offre un amaro pulito e secco",
         },
       ],
     },
@@ -122,13 +120,13 @@ const PlayPage = () => {
         {
           name: "Citra",
           description:
-            "Citra è famoso per il suo aroma di agrumi e frutti tropicali",
+            "E' famoso per il suo aroma di agrumi e frutti tropicali",
         },
         {
           name: "Hbc-630",
-          description: "Hbc-630 ha un profilo aromatico di agrumi e frutta",
+          description: "Ha un profilo aromatico di agrumi e frutta",
         },
-        { name: "Wakatu", description: "Wakatu offre note di lime e spezie" },
+        { name: "Wakatu", description: "Offre note di lime e spezie" },
       ],
     },
     {
@@ -136,16 +134,15 @@ const PlayPage = () => {
       hops: [
         {
           name: "Wai-ti",
-          description: "Wai-ti ha note di frutta tropicale e fiori",
+          description: "Ha note di frutta tropicale e fiori",
         },
         {
           name: "Mosaic",
-          description:
-            "Mosaic è noto per il suo profilo complesso di frutta e terra",
+          description: "E' noto per il suo profilo complesso di frutta e terra",
         },
         {
           name: "Vic Secret",
-          description: "Vic Secret offre sapori di frutta tropicale e pino",
+          description: "Offre sapori di frutta tropicale e pino",
         },
       ],
     },
@@ -159,7 +156,7 @@ const PlayPage = () => {
         {
           name: "US-05",
           description:
-            "US-05 è un lievito per ale americano che produce birre chiare e pulite con note fruttate",
+            "Lievito Ale americano che produce birre chiare e pulite con note fruttate",
         },
       ],
     },
@@ -169,7 +166,7 @@ const PlayPage = () => {
         {
           name: "Saflager W34/70",
           description:
-            "Saflager W34/70 è un lievito lager versatile che offre un profilo pulito e ben bilanciato",
+            "Lievito Lager versatile che offre un profilo pulito e ben bilanciato",
         },
       ],
     },
