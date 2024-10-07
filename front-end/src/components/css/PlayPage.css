@@ -199,3 +199,20 @@
   flex-direction: column;
   align-items: center;
 }
+
+/* Icone Info */
+
+.info-container {
+  float: right;
+  margin-left: 5px;
+}
+
+.info-icon {
+  color: #007bff; /* Colore icona */
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.info-icon:hover {
+  color: #0056b3; /* Colore hover */
+}

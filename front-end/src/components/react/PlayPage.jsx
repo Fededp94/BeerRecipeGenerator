@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../App.css";
 import "../css/PlayPage.css";
@@ -209,6 +211,12 @@ const PlayPage = () => {
                               selectedMalts.includes(m) ? "selected" : ""
                             }>
                             {m}
+                            <span className="info-container">
+                              <FontAwesomeIcon
+                                icon={faCircleInfo}
+                                className="info-icon"
+                              />
+                            </span>
                           </a>
                         </li>
                       ))}
@@ -241,6 +249,12 @@ const PlayPage = () => {
                               selectedHops.includes(h) ? "selected" : ""
                             }>
                             {h}
+                            <span className="info-container">
+                              <FontAwesomeIcon
+                                icon={faCircleInfo}
+                                className="info-icon"
+                              />
+                            </span>
                           </a>
                         </li>
                       ))}
@@ -271,6 +285,12 @@ const PlayPage = () => {
                             onClick={() => handleYeastChange(y)}
                             className={selectedYeast === y ? "selected" : ""}>
                             {y}
+                            <span className="info-container">
+                              <FontAwesomeIcon
+                                icon={faCircleInfo}
+                                className="info-icon"
+                              />
+                            </span>
                           </a>
                         </li>
                       ))}
