@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { Tooltip } from "react-bootstrap";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../App.css";
 import "../css/PlayPage.css";
@@ -25,9 +27,54 @@ const PlayPage = () => {
 
   // Opzioni per i malti
   const maltsOptions = [
-    { type: "Malto Chiaro", malts: ["Malto Wheat", "Pilsner", "Pale Ale"] },
-    { type: "Malto Ambrato", malts: ["Vienna", "Monaco", "Caramel"] },
-    { type: "Malto Scuro", malts: ["Abbey", "Carafa III", "Chocolate"] },
+    {
+      type: "Malto Chiaro",
+      malts: [
+        {
+          name: "Malto Wheat",
+          description: "Dona corpo leggero e schiuma persistente",
+        },
+        {
+          name: "Pilsner",
+          description: "Dona un colore chiaro e gusto pulito",
+        },
+        {
+          name: "Pale Ale",
+          description: "Dona un gusto maltato e bilanciato",
+        },
+      ],
+    },
+    {
+      type: "Malto Ambrato",
+      malts: [
+        { name: "Vienna", description: "Aggiunge dolcezza e note tostate" },
+        {
+          name: "Monaco",
+          description: "Dona colore ambrato e sapore di pane tostato",
+        },
+        {
+          name: "Caramel",
+          description: "Dona un sapore caramellato e corposo",
+        },
+      ],
+    },
+    {
+      type: "Malto Scuro",
+      malts: [
+        {
+          name: "Abbey",
+          description: "Dona sapori complessi di frutta secca",
+        },
+        {
+          name: "Carafa III",
+          description: "Aggiunge note di caffè e cioccolato",
+        },
+        {
+          name: "Chocolate",
+          description: "Conferisce sapori intensi di cacao e caffè",
+        },
+      ],
+    },
   ];
 
   // Funzione per determinare l'immagine da visualizzare
@@ -52,16 +99,80 @@ const PlayPage = () => {
   const hopsOptions = [
     {
       type: "Luppoli Base",
-      hops: ["Saaz", "Styrian Golding", "Hallertau Magnum"],
+      hops: [
+        {
+          name: "Saaz",
+          description:
+            "Saaz è un luppolo aromatico con note erbacee e speziate",
+        },
+        {
+          name: "Styrian Golding",
+          description:
+            "Styrian Golding è noto per il suo profilo floreale e dolce",
+        },
+        {
+          name: "Hallertau Magnum",
+          description: "Hallertau Magnum offre un amaro pulito e secco",
+        },
+      ],
     },
-    { type: "Luppoli Agrumati", hops: ["Citra", "Hbc-630", "Wakatu"] },
-    { type: "Luppoli Fruttati", hops: ["Wai-ti", "Mosaic", "Vic Secret"] },
+    {
+      type: "Luppoli Agrumati",
+      hops: [
+        {
+          name: "Citra",
+          description:
+            "Citra è famoso per il suo aroma di agrumi e frutti tropicali",
+        },
+        {
+          name: "Hbc-630",
+          description: "Hbc-630 ha un profilo aromatico di agrumi e frutta",
+        },
+        { name: "Wakatu", description: "Wakatu offre note di lime e spezie" },
+      ],
+    },
+    {
+      type: "Luppoli Fruttati",
+      hops: [
+        {
+          name: "Wai-ti",
+          description: "Wai-ti ha note di frutta tropicale e fiori",
+        },
+        {
+          name: "Mosaic",
+          description:
+            "Mosaic è noto per il suo profilo complesso di frutta e terra",
+        },
+        {
+          name: "Vic Secret",
+          description: "Vic Secret offre sapori di frutta tropicale e pino",
+        },
+      ],
+    },
   ];
 
   // Opzioni per i lieviti
   const yeastOptions = [
-    { type: "Lievito Ale (Alta Fermentazione)", yeast: ["US-05"] },
-    { type: "Lievito lager (Bassa Fermentazione)", yeast: ["Saflager w34/70"] },
+    {
+      type: "Lievito Ale (Alta Fermentazione)",
+      yeast: [
+        {
+          name: "US-05",
+          description:
+            "US-05 è un lievito per ale americano che produce birre chiare e pulite con note fruttate",
+        },
+      ],
+    },
+    {
+      type: "Lievito Lager (Bassa Fermentazione)",
+      yeast: [
+        {
+          name: "Saflager W34/70",
+          description:
+            "Saflager W34/70 è un lievito lager versatile che offre un profilo pulito e ben bilanciato",
+        },
+      ],
+    },
   ];
 
   const toggleRegole = () => setRegoleOpen(!regoleOpen);
@@ -217,19 +328,20 @@ const PlayPage = () => {
                     <strong>{malto.type}</strong>
                     <ul>
                       {malto.malts.map((m) => (
-                        <li key={m}>
+                        <li key={m.name}>
+                          {" "}
                           <a
                             href="#"
-                            onClick={() => handleMaltsChange(m)}
+                            onClick={() => handleMaltsChange(m.name)}
                             className={
-                              selectedMalts.includes(m) ? "selected" : ""
+                              selectedMalts.includes(m.name) ? "selected" : ""
                             }>
-                            {m}
+                            {m.name}
                             <span
                               className="info-container"
-                              data-bs-toggle="tooltip" // Attiva il tooltip
+                              data-bs-toggle="tooltip"
                               data-bs-placement="top"
-                              title={`Descrizione per ${m}`}>
+                              title={m.description}>
                               <FontAwesomeIcon
                                 icon={faCircleInfo}
                                 className="info-icon"
@@ -254,24 +366,24 @@ const PlayPage = () => {
             </button>
             {showHopsDropdown && (
               <div className="dropdown-content show">
-                {hopsOptions.map((hop) => (
-                  <div key={hop.type}>
-                    <strong>{hop.type}</strong>
+                {hopsOptions.map((hopsOption) => (
+                  <div key={hopsOption.type}>
+                    <strong>{hopsOption.type}</strong>
                     <ul>
-                      {hop.hops.map((h) => (
-                        <li key={h}>
+                      {hopsOption.hops.map((h) => (
+                        <li key={h.name}>
                           <a
                             href="#"
-                            onClick={() => handleHopsChange(h)}
+                            onClick={() => handleHopsChange(h.name)}
                             className={
-                              selectedHops.includes(h) ? "selected" : ""
+                              selectedHops.includes(h.name) ? "selected" : ""
                             }>
-                            {h}
+                            {h.name}
                             <span
                               className="info-container"
-                              data-bs-toggle="tooltip" // Attiva il tooltip
+                              data-bs-toggle="tooltip"
                               data-bs-placement="top"
-                              title={`Descrizione per ${h}`}>
+                              title={h.description}>
                               <FontAwesomeIcon
                                 icon={faCircleInfo}
                                 className="info-icon"
@@ -296,22 +408,25 @@ const PlayPage = () => {
             </button>
             {showYeastDropdown && (
               <div className="dropdown-content show">
-                {yeastOptions.map((yeast) => (
-                  <div key={yeast.type}>
-                    <strong>{yeast.type}</strong>
+                {yeastOptions.map((yeastOption) => (
+                  <div key={yeastOption.type}>
+                    <strong>{yeastOption.type}</strong>
                     <ul>
-                      {yeast.yeast.map((y) => (
-                        <li key={y}>
+                      {yeastOption.yeast.map((y) => (
+                        <li key={y.name}>
                           <a
                             href="#"
-                            onClick={() => handleYeastChange(y)}
-                            className={selectedYeast === y ? "selected" : ""}>
-                            {y}
+                            onClick={() => handleYeastChange(y.name)}
+                            className={
+                              selectedYeast === y.name ? "selected" : ""
+                            }>
+                            {y.name}
                             <span
                               className="info-container"
-                              data-bs-toggle="tooltip" // Attiva il tooltip
+                              data-bs-toggle="tooltip"
                               data-bs-placement="top"
-                              title={`Descrizione per ${y}`}>
+                              title={y.description} //Devo usare y per il tooltip
+                            >
                               <FontAwesomeIcon
                                 icon={faCircleInfo}
                                 className="info-icon"
