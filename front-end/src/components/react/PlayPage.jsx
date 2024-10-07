@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "react-bootstrap";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../App.css";
 import "../css/PlayPage.css";
