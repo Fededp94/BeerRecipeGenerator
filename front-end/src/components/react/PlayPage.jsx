@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
@@ -125,6 +125,20 @@ const PlayPage = () => {
     });
   };
 
+  useEffect(() => {
+    const tooltipTriggerList = [].slice.call(
+      document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    );
+    const tooltipList = tooltipTriggerList.map((tooltipTriggerEl) => {
+      return new window.bootstrap.Tooltip(tooltipTriggerEl);
+    });
+
+    // Cleanup dei tooltip
+    return () => {
+      tooltipList.forEach((tooltip) => tooltip.dispose());
+    };
+  }, []);
+
   return (
     <div id="play-page-container" className="container-fluid p-0 play-page-bg">
       <header className="bg-dark text-white py-2">
@@ -211,7 +225,11 @@ const PlayPage = () => {
                               selectedMalts.includes(m) ? "selected" : ""
                             }>
                             {m}
-                            <span className="info-container">
+                            <span
+                              className="info-container"
+                              data-bs-toggle="tooltip" // Attiva il tooltip
+                              data-bs-placement="top"
+                              title={`Descrizione per ${m}`}>
                               <FontAwesomeIcon
                                 icon={faCircleInfo}
                                 className="info-icon"
@@ -249,7 +267,11 @@ const PlayPage = () => {
                               selectedHops.includes(h) ? "selected" : ""
                             }>
                             {h}
-                            <span className="info-container">
+                            <span
+                              className="info-container"
+                              data-bs-toggle="tooltip" // Attiva il tooltip
+                              data-bs-placement="top"
+                              title={`Descrizione per ${h}`}>
                               <FontAwesomeIcon
                                 icon={faCircleInfo}
                                 className="info-icon"
@@ -285,7 +307,11 @@ const PlayPage = () => {
                             onClick={() => handleYeastChange(y)}
                             className={selectedYeast === y ? "selected" : ""}>
                             {y}
-                            <span className="info-container">
+                            <span
+                              className="info-container"
+                              data-bs-toggle="tooltip" // Attiva il tooltip
+                              data-bs-placement="top"
+                              title={`Descrizione per ${y}`}>
                               <FontAwesomeIcon
                                 icon={faCircleInfo}
                                 className="info-icon"
