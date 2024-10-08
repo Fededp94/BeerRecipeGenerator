@@ -81,3 +81,31 @@ ul {
   font-weight: bold;
   font-size: 1.2rem;
 }
+
+/* Bottoni a destra */
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10vh;
+  margin-top: 5vh;
+}
+
+.btn-confirm {
+  background-color: #333333;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  background-color: #333333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn-confirm:hover {
+  background-color: white;
+  color: #333333;
+}

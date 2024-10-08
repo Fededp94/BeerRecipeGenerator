@@ -6,6 +6,19 @@ h1 {
   margin-bottom: -10%;
   font-family: Teko;
 }
+header {
+  background-color: #333333;
+  width: 100%;
+  height: 8vh;
+}
+nav {
+  background-color: #333333;
+  padding: 1rem;
+  padding-bottom: 2rem;
+  color: white;
+  margin-bottom: 2rem;
+  margin: auto;
+}
 
 img {
   margin-top: -10%;

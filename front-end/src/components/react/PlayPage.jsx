@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../../App.css";
+import "../css/App.css";
 import "../css/PlayPage.css";
 import pintaImage from "../../assets/PintaVuota.png";
 import pintaChiaraImage from "../../assets/Pinta.png";
@@ -248,7 +248,7 @@ const PlayPage = () => {
 
   return (
     <div id="play-page-container" className="container-fluid p-0 play-page-bg">
-      <header className="bg-dark text-white py-2">
+      <header className="text-white py-2">
         <nav className="container d-flex justify-content-between navbar">
           <div className="beer-name-input">
             <input
@@ -450,7 +450,7 @@ const PlayPage = () => {
             </div>
           )}
           <button className="btn generate-btn" onClick={handleGenerateClick}>
-            Genera!
+            GENERA!
           </button>
         </div>
       </div>
