@@ -34,10 +34,11 @@ nav {
   margin-top: -3vh;
   margin-left: -11vh;
   max-width: 50vh;
+  border: solid 1px yellow;
 }
 
 .beer-name-input:hover {
-  border: yellow;
+  border: solid 3px yellow;
 }
 
 .input-filled {
