@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom"; // Importa useNavigate
+import { useLocation, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/ResultPage.css";
 import "../css/App.css";
@@ -7,7 +7,7 @@ import "../css/App.css";
 const ResultPage = () => {
   const location = useLocation();
   const { malts, hops, yeast, beerName } = location.state || {};
-  const navigate = useNavigate(); // Hook per la navigazione
+  const navigate = useNavigate();
 
   const [maltWeights, setMaltWeights] = useState(
     malts?.reduce((acc, malt) => ({ ...acc, [malt]: "" }), {}) || {}
@@ -52,17 +52,47 @@ const ResultPage = () => {
 
   const getEmoji = (percentage) => {
     if (percentage >= 0 && percentage <= 4) {
-      return "😢"; // triste
+      return "😢";
     } else if (percentage > 4 && percentage <= 5.9) {
-      return "😊"; // felice
+      return "😊";
     } else {
-      return "😁"; // felicissima
+      return "😁";
     }
   };
 
-  // Funzione per gestire il salvataggio della ricetta
+  // Funzione aggiornata per gestire il salvataggio della ricetta
   const handleSaveRecipe = () => {
-    console.log("Ricetta salvata!"); // Logica per salvare la ricetta
+    if (!finalRecipe) {
+      alert("Per favore, conferma prima la ricetta");
+      return;
+    }
+
+    // Recupera le ricette esistenti dal localStorage
+    const existingRecipes =
+      JSON.parse(localStorage.getItem("savedRecipes")) || [];
+
+    // Controlla se una ricetta con lo stesso nome esiste già
+    const recipeExists = existingRecipes.some(
+      (recipe) => recipe.beerName === finalRecipe.beerName
+    );
+
+    if (recipeExists) {
+      const shouldOverwrite = window.confirm(
+        "Esiste già una ricetta con questo nome. Vuoi sovrascriverla?"
+      );
+      if (shouldOverwrite) {
+        const updatedRecipes = existingRecipes.map((recipe) =>
+          recipe.beerName === finalRecipe.beerName ? finalRecipe : recipe
+        );
+        localStorage.setItem("savedRecipes", JSON.stringify(updatedRecipes));
+        alert("Ricetta aggiornata con successo!");
+      }
+    } else {
+      // Aggiungi la nuova ricetta
+      const updatedRecipes = [...existingRecipes, finalRecipe];
+      localStorage.setItem("savedRecipes", JSON.stringify(updatedRecipes));
+      alert("Ricetta salvata con successo!");
+    }
   };
 
   return (
@@ -143,7 +173,6 @@ const ResultPage = () => {
                   {getEmoji(finalRecipe.estimatedAlcohol)}
                 </div>
 
-                {/* Pulsanti sotto l'alcool stimato */}
                 <div className="button-group">
                   <button
                     className="btn-confirm"

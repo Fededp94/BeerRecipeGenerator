@@ -6,6 +6,7 @@ import "./components/css/App.css";
 import HomePage from "./components/react/HomePage.jsx";
 import PlayPage from "./components/react/PlayPage.jsx";
 import ResultPage from "./components/react/ResultPage.jsx";
+import LeMieRicette from "./components/react/LeMieRicette.jsx";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/play" element={<PlayPage />} />
         <Route path="/result" element={<ResultPage />} />
+        <Route path="/lemiericette" element={<LeMieRicette />} />
       </Routes>
     </Router>
   );
