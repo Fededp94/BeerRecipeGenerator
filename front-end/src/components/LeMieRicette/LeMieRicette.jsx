@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { jsPDF } from "jspdf";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../css/LeMieRicette.css";
-import "../css/App.css";
+import "../LeMieRicette/LeMieRicette.css";
+import "../App/App.css";
 
 const LeMieRicette = () => {
   const navigate = useNavigate();

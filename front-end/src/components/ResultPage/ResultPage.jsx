@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../css/ResultPage.css";
-import "../css/App.css";
+import "../ResultPage/ResultPage.css";
+import "../App/App.css";
 
 const ResultPage = () => {
   const location = useLocation();

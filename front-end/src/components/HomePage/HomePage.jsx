@@ -3,8 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 
 import logo from "../../assets/Logo Definitivo.png";
-import "../css/App.css";
-import "../css/HomePage.css";
+import "../App/App.css";
+import "../HomePage/HomePage.css";
 
 const HomePage = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
