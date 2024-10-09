@@ -12,7 +12,7 @@ import pintaAmbrataImage from "../../assets/PintaAmbrata.png";
 import pintaScuraImage from "../../assets/PintaScura.png";
 
 const PlayPage = () => {
-  const navigate = useNavigate(); //Funzione per la navigazione
+  const navigate = useNavigate();
 
   const [regoleOpen, setRegoleOpen] = useState(false);
   const [showMaltsDropdown, setShowMaltsDropdown] = useState(false);

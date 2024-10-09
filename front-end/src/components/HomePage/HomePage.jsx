@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
-
 import logo from "../../assets/Logo Definitivo.png";
 import "../App/App.css";
 import "../HomePage/HomePage.css";
@@ -16,16 +15,7 @@ const HomePage = () => {
     email: "",
     password: "",
   });
-  const [logoOpacity, setLogoOpacity] = useState(0);
-  const dropdownRef = useRef(null);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLogoOpacity(1);
-    }, 150);
-    return () => clearTimeout(timer);
-  }, []);
 
   const handleStartClick = () => setIsModalVisible(true);
   const handleCheckboxChange = () => setIsCheckboxChecked(!isCheckboxChecked);
@@ -42,105 +32,38 @@ const HomePage = () => {
     });
   };
 
-  const [eventiOpen, setEventiOpen] = useState(false);
-  const toggleEventi = () => setEventiOpen(!eventiOpen);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setEventiOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  const handleRecipesClick = () => {
+    navigate("/LeMieRicette");
+  };
 
   const handleProceedClick = () => {
-    navigate("/play"); // reindirizzazione pagina PlayPage
+    navigate("/play");
   };
 
   return (
-    <div className="container-fluid p-0" style={{ backgroundColor: "#f0f0f0" }}>
-      {/* Barra nera con menu */}
-      <header className="bg-dark text-white py-2">
-        <nav className="container d-flex justify-content-end">
-          <ul
-            className="navbar-nav d-flex flex-row"
-            ref={dropdownRef}
-            style={{ position: "relative" }}>
-            <li className="nav-item dropdown mx-2">
-              <a
-                className="nav-link dropdown-toggle text-white"
-                href="#"
-                id="eventsDropdown"
-                role="button"
-                aria-expanded={eventiOpen}
-                onClick={toggleEventi}>
-                Eventi futuri
-              </a>
-              {eventiOpen && (
-                <ul
-                  className="dropdown-menu show"
-                  style={{
-                    position: "absolute",
-                    top: "100%",
-                    left: 0,
-                    zIndex: 1000,
-                    backgroundColor: "#fff",
-                    border: "1px solid rgba(0, 0, 0, 0.15)",
-                    width: "auto",
-                  }}>
-                  {[...Array(20)].map((_, index) => (
-                    <li key={index}>
-                      <a className="dropdown-item" href="#">
-                        Evento {index + 1}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          </ul>
-        </nav>
+    <div className="container-fluid homepage-container">
+      <header className="navbar-header">
+        <button
+          className="btn btn-dark btn-lg navbar-button"
+          onClick={handleRecipesClick} // Aggiungi il gestore per il reindirizzamento
+        >
+          Le mie ricette
+        </button>
       </header>
 
-      {/* Contenuto della Homepage */}
-      <div
-        className="d-flex flex-column justify-content-center align-items-center"
-        style={{
-          minHeight: "100vh",
-          background: "url('')",
-          backgroundSize: "cover",
-        }}>
-        <h1
-          className="text-black mb-1"
-          /* style={{ fontFamily: "Teko", fontSize: "6rem" }} */
-        >
-          BEER RECIPE GENERATOR
-        </h1>
+      <div className="homepage-content">
+        <h1 className="main-title">BEER RECIPE GENERATOR</h1>
 
-        <img
-          src={logo}
-          alt="Logo del Sito"
-          className="mb-1"
-          style={{
-            width: "900px",
-            height: "auto",
-            opacity: logoOpacity,
-            transition: "opacity 1s ease-in-out",
-          }}
-        />
+        <div className="logo-container">
+          <img src={logo} alt="Logo del Sito" className="homepage-logo" />
+        </div>
 
         {!isRegistered && (
-          <div className="d-flex justify-content-center mt-0">
+          <div className="start-button-container">
             <button
-              className="btn btn-dark btn-lg"
-              onClick={handleStartClick}
-              style={{ fontSize: "2rem", margin: "5vh" }}>
-              INIZIAMO!!
+              className="btn btn-dark btn-lg start-button"
+              onClick={handleStartClick}>
+              Inziamo!
             </button>
           </div>
         )}
@@ -148,14 +71,7 @@ const HomePage = () => {
 
       {isRegistered && (
         <button
-          className="btn btn-dark position-fixed"
-          style={{
-            bottom: "60px",
-            right: "20px",
-            fontSize: "2rem",
-            color: "white",
-            backgroundColor: "#333333",
-          }}
+          className="btn btn-dark proceed-button"
           onClick={handleProceedClick}>
           ORA PUOI PROCEDERE
         </button>
@@ -163,18 +79,14 @@ const HomePage = () => {
 
       {isModalVisible && (
         <div
-          className="modal show d-block"
+          className="modal show registration-modal"
           tabIndex="-1"
-          role="dialog"
-          style={{
-            backdropFilter: "blur(5px)",
-            backgroundColor: "rgba(255, 255, 255, 0.8)",
-          }}>
+          role="dialog">
           <div className="modal-dialog modal-dialog-centered" role="document">
-            <div className="modal-content position-relative">
+            <div className="modal-content">
               <button
                 type="button"
-                className="btn-close position-absolute top-0 end-0 m-2"
+                className="btn-close modal-close-button"
                 aria-label="Close"
                 onClick={() => setIsModalVisible(false)}></button>
               <div className="modal-header">

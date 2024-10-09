@@ -1,51 +1,132 @@
-h1 {
-  font-size: 15vh;
-  font-weight: 300;
-  color: #333333;
-  margin-top: -15%;
-  margin-bottom: -10%;
-  font-family: Teko;
-}
-header {
+.navbar-header {
   background-color: #333333;
   width: 100%;
-  height: 8vh;
+  height: 10vh;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 20px;
 }
-nav {
-  background-color: #333333;
-  padding: 1rem;
-  padding-bottom: 2rem;
+
+/* Bottone le mie ricette */
+.navbar-button {
+  font-family: sans-serif;
+  font-weight: 400;
+  background-color: #ffbb00;
   color: white;
-  margin-bottom: 2rem;
-  margin: auto;
+  border: none;
+  font-size: 1rem;
+  margin: 5vh;
 }
 
-img {
-  margin-top: -10%;
-  margin-bottom: -10%;
+.navbar-button:hover {
+  background-color: #ecad00;
+  color: #333333;
 }
 
-button {
-  font-family: Teko;
+.start-button {
+  font-family: sans-serif;
+  font-weight: 400;
+  background-color: #ffbb00;
+  color: white;
+  border: none;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  font-size: 2rem;
+  margin: 5vh;
 }
 
-/* Dropdown in posizione assoluta */
+.start-button:hover {
+  transform: translateY(-5px);
+  background-color: #ecad00;
+  color: #333333;
+}
+
+/* Dropdown styles */
 .custom-dropdown {
   position: absolute;
-  top: 100%; /* Posiziona il menu sotto il pulsante */
+  top: 100%;
   left: 0;
   background-color: white;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   padding: 10px;
-  display: none; /* Inizialmente nascosto */
+  display: none;
   z-index: 1000;
-  width: 200px; /* Larghezza fissa per il dropdown */
-  max-height: 300px; /* Limita l'altezza massima */
-  overflow-y: auto; /* Aggiungi scorrimento se supera l'altezza */
+  width: 200px;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
-/* Mostra il dropdown solo se è aperto */
 .custom-dropdown.open {
   display: block;
+}
+
+/* Homepage container */
+.homepage-container {
+  background-color: #f0f0f0;
+  padding: 0;
+}
+
+/* Main content area */
+.homepage-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-size: cover;
+}
+
+/* Title styles */
+.main-title {
+  font-size: 10vh;
+  font-weight: 600;
+  color: #333333;
+  margin-top: -45vh;
+  font-family: sans-serif;
+  margin-bottom: 2rem;
+  display: inline;
+  -webkit-text-stroke: 2px #ffbb00;
+}
+
+/* Logo styles */
+.logo-container {
+  margin: 2rem 0;
+  margin-top: -25vh;
+}
+
+.homepage-logo {
+  width: 900px;
+  height: auto;
+  opacity: var(--logo-opacity);
+  transition: opacity 1s ease-in-out;
+}
+
+/* Button styles */
+.start-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: -20vh;
+}
+
+.proceed-button {
+  position: fixed;
+  bottom: 60px;
+  right: 20px;
+  font-size: 2rem;
+  color: white;
+  background-color: #333333;
+}
+
+/* Modal styles */
+.registration-modal {
+  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0.5rem;
 }

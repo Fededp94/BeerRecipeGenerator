@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { jsPDF } from "jspdf";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../LeMieRicette/LeMieRicette.css";
+import "./LeMieRicette.css";
 import "../App/App.css";
 
 const LeMieRicette = () => {
