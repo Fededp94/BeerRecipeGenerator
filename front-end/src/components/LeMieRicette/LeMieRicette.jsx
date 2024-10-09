@@ -57,7 +57,7 @@ const LeMieRicette = () => {
       <div className="container main-content">
         <div className="row">
           <div className="col-md-8 recipes-list">
-            <h2>Le Mie Ricette</h2>
+            <h2>Le mie ricette</h2>
             {recipes.length === 0 ? (
               <p>Non hai ancora salvato nessuna ricetta</p>
             ) : (
@@ -71,11 +71,9 @@ const LeMieRicette = () => {
                     onClick={() => setSelectedRecipe(index)}>
                     <div className="recipe-card-content">
                       <h3>{recipe.beerName}</h3>
-                      <p>Alcool: {recipe.estimatedAlcohol}%</p>
-                      <div className="recipe-details">
-                        <p>Malti: {Object.keys(recipe.malts).length}</p>
-                        <p>Luppoli: {recipe.hops.length}</p>
-                      </div>
+                      <h4>Malti: {Object.keys(recipe.malts).length}</h4>
+                      <h4>Luppoli: {recipe.hops.length}</h4>
+                      <h4>Alcol: {recipe.estimatedAlcohol}%</h4>
                     </div>
                     <div className="recipe-card-footer">
                       <button

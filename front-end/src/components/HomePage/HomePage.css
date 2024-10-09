@@ -114,8 +114,19 @@
   bottom: 60px;
   right: 20px;
   font-size: 2rem;
+  font-family: sans-serif;
+  font-weight: 600;
+  border: none;
   color: white;
-  background-color: #333333;
+  background-color: #ffbb00;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.proceed-button:hover {
+  background-color: #ecad00;
+  color: #333333;
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Modal styles */
@@ -129,4 +140,51 @@
   top: 0;
   right: 0;
   margin: 0.5rem;
+}
+
+/* hamburger menu */
+.menu-icon {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px; /* Larghezza dell'icona */
+  height: 25px; /* Altezza dell'icona */
+}
+
+.bar {
+  height: 4px;
+  width: 100%;
+  background-color: #ffbb00;
+}
+
+.dropdown-menu {
+  position: absolute; /* Per assicurarti che il menu si posizioni rispetto al suo genitore */
+  right: 0; /* Posiziona il menu a destra */
+  top: 60px; /* Spazio dalla parte superiore */
+  background-color: #f8f9fa; /* Colore di sfondo */
+  border: 1px solid #ccc; /* Bordo del menu */
+  border-radius: 5px; /* Angoli arrotondati */
+  width: 200px; /* Larghezza del menu */
+  z-index: 1000; /* Assicurati che il menu sia sopra altri elementi */
+
+  width: 200px; /* Puoi modificare la larghezza */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-menu.show {
+  transform: translateX(0); /* Visibile quando mostrato */
+}
+
+.dropdown-menu ul {
+  padding: 20px;
+}
+
+.dropdown-menu li {
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.dropdown-menu li:hover {
+  color: #007bff; /* Cambia colore al passaggio del mouse */
 }

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/Logo Definitivo.png";
@@ -15,6 +15,7 @@ const HomePage = () => {
     email: "",
     password: "",
   });
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false); // Stato per il dropdown
   const navigate = useNavigate();
 
   const handleStartClick = () => setIsModalVisible(true);
@@ -40,16 +41,57 @@ const HomePage = () => {
     navigate("/play");
   };
 
+  const toggleDropdown = () => {
+    setIsDropdownVisible(!isDropdownVisible);
+  };
+
   return (
     <div className="container-fluid homepage-container">
       <header className="navbar-header">
         <button
           className="btn btn-dark btn-lg navbar-button"
-          onClick={handleRecipesClick} // Aggiungi il gestore per il reindirizzamento
+          onClick={toggleDropdown} // Aggiungi il gestore per il dropdown
         >
-          Le mie ricette
+          &#9776; {/* Icona hamburger per il menu */}
         </button>
       </header>
+
+      {/* Dropdown Menu */}
+      {isDropdownVisible && (
+        <div
+          className="dropdown-menu position-absolute"
+          style={{
+            right: 0,
+            top: "60px",
+            backgroundColor: "white",
+            border: "1px solid #ddd",
+            borderRadius: "5px",
+            zIndex: 1000,
+          }}>
+          <ul className="list-unstyled">
+            <li
+              onClick={() => navigate("/profilo")}
+              style={{ padding: "10px", cursor: "pointer" }}>
+              Il mio profilo
+            </li>
+            <li
+              onClick={handleRecipesClick}
+              style={{ padding: "10px", cursor: "pointer" }}>
+              Le mie ricette
+            </li>
+            <li
+              onClick={() => navigate("/contatti")}
+              style={{ padding: "10px", cursor: "pointer" }}>
+              Contatti
+            </li>
+            <li
+              onClick={() => navigate("/eventi-futuri")}
+              style={{ padding: "10px", cursor: "pointer" }}>
+              Eventi futuri
+            </li>
+          </ul>
+        </div>
+      )}
 
       <div className="homepage-content">
         <h1 className="main-title">BEER RECIPE GENERATOR</h1>
@@ -63,7 +105,7 @@ const HomePage = () => {
             <button
               className="btn btn-dark btn-lg start-button"
               onClick={handleStartClick}>
-              Inziamo!
+              Iniziamo!
             </button>
           </div>
         )}
@@ -73,7 +115,7 @@ const HomePage = () => {
         <button
           className="btn btn-dark proceed-button"
           onClick={handleProceedClick}>
-          ORA PUOI PROCEDERE
+          PUOI PROCEDERE
         </button>
       )}
 
