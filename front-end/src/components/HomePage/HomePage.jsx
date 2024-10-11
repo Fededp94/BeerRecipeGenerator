@@ -197,7 +197,7 @@ const HomePage = () => {
                       onChange={handleCheckboxChange}
                     />
                     <label className="form-check-label" htmlFor="ageCheck">
-                      Sono maggiorenne 18+
+                      <span>Sono maggiorenne 18+</span>
                     </label>
                   </div>
                   {isCheckboxChecked && (

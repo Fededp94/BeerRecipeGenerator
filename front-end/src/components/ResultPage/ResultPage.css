@@ -1,5 +1,7 @@
 .navbar {
   background-color: #333333;
+  width: 100%;
+  height: 10vh;
   padding: 1rem;
   padding-bottom: 2rem;
   color: white;
@@ -10,6 +12,7 @@
   display: flex;
   gap: 2rem;
   justify-content: space-between;
+  margin-bottom: 3vh;
 }
 
 .recipe-section {
@@ -19,8 +22,14 @@
   padding: 1.5rem;
   background-color: #f9f9f9;
   max-width: 48%;
+  background-color: #333333;
+  color: white;
+  border: 5px solid #ffbb00;
+  font-family: sans-serif;
+  font-weight: 600;
 }
 
+/* Input malti */
 .malt-input {
   display: grid;
   grid-template-columns: 1fr 100px;
@@ -32,6 +41,23 @@
   width: 80px;
   padding: 0.25rem;
   justify-self: end;
+  border: none;
+  margin-top: 1vh;
+  color: #333333;
+  font-family: sans-serif;
+  font-weight: 600;
+  background-color: white;
+}
+
+.malt-input input::placeholder {
+  font-family: sans-serif;
+  font-weight: 600;
+  color: #333333;
+}
+
+.malt-input input:hover {
+  box-shadow: 0px 2px 5px 0px rgba(255, 255, 255, 0.76);
+  transform: translateY(-2px);
 }
 
 .button-container {
@@ -43,21 +69,29 @@
 .confirm-button {
   padding: 0.75rem 1.5rem;
   background-color: #333333;
-  color: white;
+  color: #333333;
+  background-color: #ffbb00;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 1.1rem;
-  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.3);
+  font-family: sans-serif;
+  font-weight: 600;
+  box-shadow: 0px 4px 6px 0px rgba(255, 255, 255, 0.918);
 }
 
 .confirm-button:hover {
   background-color: white;
   color: #333333;
+  box-shadow: none;
+  transform: translateY(5px);
 }
 
-.final-recipe {
-  background-color: #e9ecef;
+.custom-recipe {
+  background-color: white;
+  color: #333333;
+  border: 5px solid #333333;
+  font-family: sans-serif;
+  font-weight: 600;
 }
 
 .final-recipe .malt-amount {
@@ -66,9 +100,10 @@
 
 .alcohol-content {
   margin-top: 1rem;
+  font-family: sans-serif;
   font-weight: bold;
-  font-size: x-large;
-  color: #d63384;
+  font-size: 2rem;
+  color: #ffbb00;
 }
 
 ul {
@@ -82,8 +117,7 @@ ul {
   font-size: 1.2rem;
 }
 
-/* Bottoni a destra */
-
+/* Bottoni ricetta finale */
 .button-group {
   display: flex;
   justify-content: center;
@@ -103,9 +137,14 @@ ul {
   cursor: pointer;
   font-size: 1.1rem;
   box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.3);
+  font-family: sans-serif;
+  font-weight: 600;
 }
 
 .btn-confirm:hover {
-  background-color: white;
+  background-color: #ffbb00;
   color: #333333;
+  transform: translateY(5px);
+  box-shadow: none;
+  border: none;
 }

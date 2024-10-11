@@ -248,62 +248,62 @@ const PlayPage = () => {
 
   return (
     <div id="play-page-container" className="container-fluid p-0 play-page-bg">
-      <header className="text-white py-2">
-        <nav className="container d-flex justify-content-between navbar">
-          <div className="beer-name-input">
-            <input
-              type="text"
-              placeholder="Il nome della tua birra!"
-              className={beerName ? "input-filled" : "input-empty"}
-              value={beerName}
-              onChange={(e) => setBeerName(e.target.value)}
-            />
-          </div>
-          <ul className="navbar-nav d-flex flex-row">
-            <li className="nav-item dropdown mx-2">
-              <a
-                className="nav-link dropdown-toggle text-white"
-                href="#"
-                id="rulesDropdown"
-                role="button"
-                aria-expanded={regoleOpen}
-                onClick={toggleRegole}>
-                Regole
-              </a>
-              {regoleOpen && (
-                <ul className="dropdown-menu show">
-                  <li>
-                    <a className="dropdown-item">
-                      1. Selezionare i <strong>malti</strong> che si vogliono
-                      inserire nella <br /> ricetta cliccando sul pulsante
-                      <strong> Malti</strong>. &#40; Max. 3 &#41;
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item">
-                      2. Selezionare i <strong>luppoli</strong> che si vogliono
-                      inserire nella <br /> ricetta cliccando sul pulsante{" "}
-                      <strong> Luppoli</strong>. &#40; Max. 4 &#41;
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item">
-                      3. Scegliere uno dei due <strong>lieviti</strong> proposti
-                      cliccando sul
-                      <br /> pulsante <strong> Lieviti</strong>. &#40; Max. 1
-                      &#41;
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item">
-                      4. Premere <strong>Genera</strong>!
-                    </a>
-                  </li>
-                </ul>
-              )}
-            </li>
-          </ul>
-        </nav>
+      <header className="text-white py-2 d-flex justify-content-between align-items-center">
+        <div className="beer-name-input">
+          <input
+            type="text"
+            placeholder="Il nome della tua birra!"
+            className={beerName ? "input-filled" : "input-empty"}
+            value={beerName}
+            onChange={(e) => setBeerName(e.target.value)}
+          />
+        </div>
+
+        <ul className="navbar-nav d-flex flex-row ms-auto">
+          {" "}
+          <li className="nav-item dropdown mx-2 position-relative">
+            <a
+              className="nav-link dropdown-toggle text-white"
+              href="#"
+              id="rulesDropdown"
+              role="button"
+              aria-expanded={regoleOpen}
+              onClick={toggleRegole}>
+              Regole
+            </a>
+            {regoleOpen && (
+              <ul className="dropdown-menu show position-absolute custom-dropdown">
+                <li>
+                  <a className="dropdown-item">
+                    1. Selezionare i <strong>malti</strong> che si vogliono
+                    inserire nella <br /> ricetta cliccando sul pulsante
+                    <strong> Malti</strong>. &#40; Max. 3 &#41;
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item">
+                    2. Selezionare i <strong>luppoli</strong> che si vogliono
+                    inserire nella <br /> ricetta cliccando sul pulsante{" "}
+                    <strong> Luppoli</strong>. &#40; Max. 4 &#41;
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item">
+                    3. Scegliere uno dei due <strong>lieviti</strong> proposti
+                    cliccando sul
+                    <br /> pulsante <strong> Lieviti</strong>. &#40; Max. 1
+                    &#41;
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item">
+                    4. Premere <strong>Genera</strong>!
+                  </a>
+                </li>
+              </ul>
+            )}
+          </li>
+        </ul>
       </header>
 
       <div

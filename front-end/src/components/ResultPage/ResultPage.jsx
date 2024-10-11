@@ -102,7 +102,7 @@ const ResultPage = () => {
       <div className="container">
         <div className="recipe-container">
           <div className="recipe-section">
-            <h3>Nome della Birra</h3>
+            <h3>Nome della Birra:</h3>
             {beerName ? (
               <div className="beer-name">{beerName}</div>
             ) : (
@@ -141,7 +141,7 @@ const ResultPage = () => {
             </div>
           </div>
 
-          <div className="recipe-section final-recipe">
+          <div className="recipe-section final-recipe custom-recipe">
             <h2>Ricetta Finale (25 Litri)</h2>
             {finalRecipe ? (
               <>
@@ -169,7 +169,7 @@ const ResultPage = () => {
                   <p>{finalRecipe.yeast || "None"}</p>
                 </div>
                 <div className="alcohol-content">
-                  Alcool Stimato: {finalRecipe.estimatedAlcohol}%{" "}
+                  Alcol Stimato: {finalRecipe.estimatedAlcohol}%{" "}
                   {getEmoji(finalRecipe.estimatedAlcohol)}
                 </div>
 

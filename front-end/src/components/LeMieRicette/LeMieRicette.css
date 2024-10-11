@@ -4,7 +4,7 @@
 
 .recipes-list {
   padding: 15px;
-  border: 1px solid white;
+  border: 3px solid #ffbb00;
   border-radius: 8px;
   background-color: #333333;
 }
@@ -84,7 +84,7 @@
   position: sticky;
   top: 20px;
   padding: 15px;
-  border: 3px solid #333333;
+  border: 5px solid #333333;
   background-color: #ffbb00;
   border-radius: 8px;
 }
@@ -144,7 +144,7 @@ button {
   border: none;
   transform: translateY(-2px);
 }
-
+/* Bottono torna alla Home */
 .btn-secondary {
   background-color: #333333;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
@@ -155,7 +155,7 @@ button {
 }
 
 .btn-secondary:hover {
-  background-color: white;
+  background-color: #ffbb00;
   box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
   transform: translateY(-5px);
   color: #333333;

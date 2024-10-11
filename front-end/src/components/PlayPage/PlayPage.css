@@ -9,21 +9,35 @@
 header {
   background-color: #333333;
   width: 100%;
-  height: 8vh;
-}
-nav {
-  width: 100%;
-  height: 8vh;
+  height: 10vh;
 }
 
 .dropdown-menu {
   background-color: #f1f1f1;
   position: relative;
-  margin-left: -45vh;
 }
 
 .nav-link {
-  margin-left: -10vh;
+  background-color: none;
+  margin-right: 60vh;
+}
+
+/* Menu a tendina regole */
+.custom-dropdown {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  z-index: 1000;
+  width: 60vh;
+  border: 3px solid #333333;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.dropdown-item:hover {
+  background-color: transparent;
 }
 
 /* Input nome birra */
@@ -31,24 +45,56 @@ nav {
   display: flex;
   align-items: center;
   margin-right: auto;
-  margin-top: -3vh;
-  margin-left: -11vh;
-  max-width: 50vh;
-  border: solid 1px yellow;
+  margin-left: 3%;
+  max-width: 10vh;
+  border: none;
 }
 
 .beer-name-input:hover {
-  border: solid 3px yellow;
+  border: none;
 }
 
 .input-filled {
-  background-color: #fff;
-  border-color: yellow;
+  background-color: #ffbb00;
+  border-radius: 5px;
+  border: 3px solid white;
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #333333;
+}
+
+.input-filled::placeholder {
+  font-family: sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333333;
 }
 
 .input-empty {
-  background-color: #fff;
-  border-color: yellow;
+  background-color: #ffbb00;
+  border: 3px solid white;
+  border-radius: 5px;
+}
+
+.input-empty::placeholder {
+  font-family: sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333333;
+}
+
+/* Layout generale */
+#play-page-container {
+  position: absolute;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: -35%;
 }
 
 /* Pulsanti Malti, Luppoli, Lieviti */
@@ -59,29 +105,38 @@ nav {
   height: 100px;
   margin: 10px;
   margin-top: 10%;
-  font-size: 1.2rem;
+  font-size: 2rem;
   font-weight: 600;
+  font-family: sans-serif;
   background-color: #333333;
   color: white;
-  font-size: xx-large;
   box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.3),
     inset 0px -2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Dropdown per i pulsanti */
+.malts-btn:hover,
+.hops-btn:hover,
+.yeast-btn:hover {
+  transform: translateY(-5px);
+}
+
+/* Tendine Malti,Luppoli,lieviti */
 .dropdown-content {
   display: none;
   position: absolute;
   margin-left: 1.5vh;
   background-color: #f9f9f9;
-  border-color: solid 5px #333333;
-  min-width: 42.5vh;
+  min-width: 300px;
+  max-width: 300px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  font-family: sans-serif;
+  font-weight: 500;
 }
+
 /* Dropdown tendina luppoli e lievito */
 .dropdown-content a {
-  color: black;
+  color: #333333;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
@@ -106,19 +161,24 @@ nav {
   display: block;
 }
 
-/* Layout generale */
-#play-page-container {
-  position: absolute;
+/* Icone Info */
+
+.info-container {
+  float: right;
+  margin-left: 5px;
 }
 
-.buttons-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-  margin-top: -35%;
+.info-icon {
+  color: #007bff;
+  cursor: pointer;
+  transition: color 0.3s;
 }
 
+.info-icon:hover {
+  color: #0056b3;
+}
+
+/* Controller Pinta */
 .pinta-container {
   position: absolute;
   margin-left: -30%;
@@ -133,7 +193,7 @@ nav {
 }
 
 .selected {
-  background-color: #36ff00;
+  background-color: #ffbb00;
 }
 /* Contenitore immagine pinta */
 .beer-glass {
@@ -160,33 +220,19 @@ nav {
   min-width: 70%;
   min-height: 15vh;
   border-radius: 5px;
-  font-size: xx-large;
+  font-size: 2rem;
+  font-family: sans-serif;
   font-weight: 600;
   border: none;
   box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.3),
-    inset 0px -2px 4px rgba(0, 0, 0, 0.1); /* Ombra esterna e interna */
-  background: linear-gradient(145deg, #333333, #333333); /* Colore 3D */
-  transition: all 0.2s ease-in-out; /* Effetto di transizione */
+    inset 0px -2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
 }
 
 .generate-btn:hover {
-  background: rgb(35, 194, 43);
-  background: -moz-radial-gradient(
-    circle,
-    rgba(35, 194, 43, 1) 55%,
-    rgba(0, 105, 0, 1) 100%
-  );
-  background: -webkit-radial-gradient(
-    circle,
-    rgba(35, 194, 43, 1) 55%,
-    rgba(0, 105, 0, 1) 100%
-  );
-  background: radial-gradient(
-    circle,
-    rgba(35, 194, 43, 1) 55%,
-    rgba(0, 105, 0, 1) 100%
-  );
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#23c22b",endColorstr="#006900",GradientType=1);
+  background-color: #ffbb00;
+  color: #333333;
+  transform: translateY(-5px);
 }
 
 /* Messaggio di errore */
@@ -197,34 +243,19 @@ nav {
   padding: 10px 15px;
   border-radius: 4px;
   background-color: #f8d7da;
-  border-color: #f5c6cb;
+  border-color: 5px solid #ffa7af;
   color: #721c24;
   width: 70%;
   max-width: 100%;
   min-height: 10%;
   font-size: 1rem;
   line-height: 1.4;
+  font-family: sans-serif;
+  font-weight: 600;
 }
 
 .generate-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-/* Icone Info */
-
-.info-container {
-  float: right;
-  margin-left: 5px;
-}
-
-.info-icon {
-  color: #007bff; /* Colore icona */
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.info-icon:hover {
-  color: #0056b3; /* Colore hover */
 }

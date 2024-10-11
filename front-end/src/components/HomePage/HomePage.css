@@ -77,7 +77,7 @@
   background-size: cover;
 }
 
-/* Title styles */
+/* Titolo */
 .main-title {
   font-size: 10vh;
   font-weight: 600;
@@ -89,7 +89,7 @@
   -webkit-text-stroke: 2px #ffbb00;
 }
 
-/* Logo styles */
+/* Logo */
 .logo-container {
   margin: 2rem 0;
   margin-top: -25vh;
@@ -102,7 +102,7 @@
   transition: opacity 1s ease-in-out;
 }
 
-/* Button styles */
+/* Button */
 .start-button-container {
   display: flex;
   justify-content: center;
@@ -118,18 +118,18 @@
   font-weight: 600;
   border: none;
   color: white;
-  background-color: #ffbb00;
+  background-color: #333333;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .proceed-button:hover {
-  background-color: #ecad00;
+  background-color: white;
   color: #333333;
   transform: translateY(-5px);
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Modal styles */
+/* Dropdown registrazione */
 .registration-modal {
   backdrop-filter: blur(5px);
   background-color: rgba(255, 255, 255, 0.8);
@@ -140,6 +140,71 @@
   top: 0;
   right: 0;
   margin: 0.5rem;
+}
+
+.modal-content {
+  background-color: #ffbb00;
+  border: 5px solid #333333;
+}
+
+.modal-title {
+  font-family: sans-serif;
+  font-weight: 600;
+  color: #333333;
+}
+
+.form-group {
+  font-family: sans-serif;
+  font-weight: 600;
+  color: #333333;
+}
+
+.form-control {
+  background-color: #333333;
+  border: none;
+}
+
+.form-control:active {
+  border: none;
+}
+
+.form-check {
+  margin-top: 5%;
+}
+
+.form-check-input {
+  appearance: none;
+  border: 3px solid #333333;
+  background-color: transparent;
+}
+
+.form-check-label {
+  font-family: sans-serif;
+  font-weight: 600;
+  color: #333333;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.form-control:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.btn-success {
+  font-family: sans-serif;
+  font-weight: 600;
+  background-color: #333333;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: white;
+  color: #333333;
+  border: none;
 }
 
 /* hamburger menu */
@@ -165,10 +230,10 @@
   background-color: #f8f9fa; /* Colore di sfondo */
   border: 1px solid #ccc; /* Bordo del menu */
   border-radius: 5px; /* Angoli arrotondati */
-  width: 200px; /* Larghezza del menu */
-  z-index: 1000; /* Assicurati che il menu sia sopra altri elementi */
+  width: 200px;
+  z-index: 1000;
 
-  width: 200px; /* Puoi modificare la larghezza */
+  width: 200px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
