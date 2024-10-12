@@ -205,49 +205,23 @@ input:focus {
   border: none;
 }
 
-/* hamburger menu */
-.menu-icon {
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 30px; /* Larghezza dell'icona */
-  height: 25px; /* Altezza dell'icona */
+/* button Le mie ricette */
+
+.custom-btn {
+  font-family: sans-serif;
+  font-weight: 600;
+  border: none;
+  box-shadow: none;
 }
 
-.bar {
-  height: 4px;
-  width: 100%;
-  background-color: #ffbb00;
+.custom-btn:hover {
+  background-color: white;
+  color: #333333;
 }
 
-.dropdown-menu {
-  position: absolute; /* Per assicurarti che il menu si posizioni rispetto al suo genitore */
-  right: 0; /* Posiziona il menu a destra */
-  top: 60px; /* Spazio dalla parte superiore */
-  background-color: #f8f9fa; /* Colore di sfondo */
-  border: 1px solid #ccc; /* Bordo del menu */
-  border-radius: 5px; /* Angoli arrotondati */
-  width: 200px;
-  z-index: 1000;
-
-  width: 200px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.dropdown-menu.show {
-  transform: translateX(0); /* Visibile quando mostrato */
-}
-
-.dropdown-menu ul {
-  padding: 20px;
-}
-
-.dropdown-menu li {
-  margin: 10px 0;
-  cursor: pointer;
-}
-
-.dropdown-menu li:hover {
-  color: #007bff; /* Cambia colore al passaggio del mouse */
+.custom-button {
+  font-family: sans-serif;
+  font-weight: 600;
+  margin-left: 2vh;
+  width: 18vh;
 }

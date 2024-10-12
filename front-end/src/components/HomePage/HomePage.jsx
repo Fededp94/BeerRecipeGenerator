@@ -8,23 +8,42 @@ import "../HomePage/HomePage.css";
 const HomePage = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
-  const [isRegistered, setIsRegistered] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(
+    localStorage.getItem("isRegistered") || false
+  );
   const [formData, setFormData] = useState({
     nome: "",
     cognome: "",
     email: "",
     password: "",
   });
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false); // Stato per il dropdown
   const navigate = useNavigate();
 
-  const handleStartClick = () => setIsModalVisible(true);
+  const handleStartClick = () => {
+    setIsModalVisible(true);
+    setFormData({
+      nome: "",
+      cognome: "",
+      email: "",
+      password: "",
+    });
+    setIsCheckboxChecked(false); // Deseleziona la checkbox
+  };
+
   const handleCheckboxChange = () => setIsCheckboxChecked(!isCheckboxChecked);
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    setIsModalVisible(false);
+    // Imposta lo stato come registrato e salva nel localStorage ( DA SOSTITUIRE CON BACKEND!!!)
     setIsRegistered(true);
+    localStorage.setItem("isRegistered", true);
+    setIsModalVisible(false);
   };
+
+  const handleProceedClick = () => {
+    navigate("/play");
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -33,65 +52,36 @@ const HomePage = () => {
     });
   };
 
-  const handleRecipesClick = () => {
-    navigate("/LeMieRicette");
+  const handleLogout = () => {
+    // Rimuove i dati dal localStorage e aggiorna lo stato
+    localStorage.removeItem("isRegistered");
+    setIsRegistered(false);
   };
 
-  const handleProceedClick = () => {
-    navigate("/play");
-  };
-
-  const toggleDropdown = () => {
-    setIsDropdownVisible(!isDropdownVisible);
+  const handleLeMieRicetteClick = () => {
+    if (!isRegistered) {
+      setIsModalVisible(true); // Mostra il modal di registrazione se non è registrato
+    }
   };
 
   return (
     <div className="container-fluid homepage-container">
       <header className="navbar-header">
         <button
-          className="btn btn-dark btn-lg navbar-button"
-          onClick={toggleDropdown} // Aggiungi il gestore per il dropdown
-        >
-          &#9776; {/* Icona hamburger per il menu */}
+          className="btn btn-dark btn-lg navbar-button custom-btn"
+          onClick={handleLeMieRicetteClick}>
+          Le mie ricette
         </button>
-      </header>
 
-      {/* Dropdown Menu */}
-      {isDropdownVisible && (
-        <div
-          className="dropdown-menu position-absolute"
-          style={{
-            right: 0,
-            top: "60px",
-            backgroundColor: "white",
-            border: "1px solid #ddd",
-            borderRadius: "5px",
-            zIndex: 1000,
-          }}>
-          <ul className="list-unstyled">
-            <li
-              onClick={() => navigate("/profilo")}
-              style={{ padding: "10px", cursor: "pointer" }}>
-              Il mio profilo
-            </li>
-            <li
-              onClick={handleRecipesClick}
-              style={{ padding: "10px", cursor: "pointer" }}>
-              Le mie ricette
-            </li>
-            <li
-              onClick={() => navigate("/contatti")}
-              style={{ padding: "10px", cursor: "pointer" }}>
-              Contatti
-            </li>
-            <li
-              onClick={() => navigate("/eventi-futuri")}
-              style={{ padding: "10px", cursor: "pointer" }}>
-              Eventi futuri
-            </li>
-          </ul>
-        </div>
-      )}
+        {/* il pulsante di Logout che appare solo dopo la registrazione */}
+        {isRegistered && (
+          <button
+            className="btn btn-dark btn-lg navbar-button ml-3 custom-button"
+            onClick={handleLogout}>
+            Logout
+          </button>
+        )}
+      </header>
 
       <div className="homepage-content">
         <h1 className="main-title">BEER RECIPE GENERATOR</h1>
@@ -109,15 +99,17 @@ const HomePage = () => {
             </button>
           </div>
         )}
-      </div>
 
-      {isRegistered && (
-        <button
-          className="btn btn-dark proceed-button"
-          onClick={handleProceedClick}>
-          PUOI PROCEDERE
-        </button>
-      )}
+        {isRegistered && (
+          <div className="button-container">
+            <button
+              className="btn btn-dark proceed-button"
+              onClick={handleProceedClick}>
+              PUOI PROCEDERE
+            </button>
+          </div>
+        )}
+      </div>
 
       {isModalVisible && (
         <div
