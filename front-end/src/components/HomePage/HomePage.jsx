@@ -19,8 +19,9 @@ const HomePage = () => {
   });
   const navigate = useNavigate();
 
+  // Reset del form ogni volta che il modal si apre
   const handleStartClick = () => {
-    setIsModalVisible(true);
+    setIsModalVisible(true); // Apre il modal
     setFormData({
       nome: "",
       cognome: "",
@@ -34,7 +35,7 @@ const HomePage = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    // Imposta lo stato come registrato e salva nel localStorage ( DA SOSTITUIRE CON BACKEND!!!)
+    // Imposta lo stato come registrato e salva nel localStorage (DA CAMBIARE CON BACKEND)
     setIsRegistered(true);
     localStorage.setItem("isRegistered", true);
     setIsModalVisible(false);
@@ -53,14 +54,15 @@ const HomePage = () => {
   };
 
   const handleLogout = () => {
-    // Rimuove i dati dal localStorage e aggiorna lo stato
     localStorage.removeItem("isRegistered");
     setIsRegistered(false);
   };
 
   const handleLeMieRicetteClick = () => {
     if (!isRegistered) {
-      setIsModalVisible(true); // Mostra il modal di registrazione se non è registrato
+      setIsModalVisible(true);
+    } else {
+      navigate("/LeMieRicette");
     }
   };
 
@@ -73,10 +75,10 @@ const HomePage = () => {
           Le mie ricette
         </button>
 
-        {/* il pulsante di Logout che appare solo dopo la registrazione */}
+        {/* Pulsante di Logout che appare solo dopo la registrazione */}
         {isRegistered && (
           <button
-            className="btn btn-dark btn-lg navbar-button ml-3 custom-button"
+            className="btn btn-dark btn-lg navbar-button custom-button ml-3"
             onClick={handleLogout}>
             Logout
           </button>
