@@ -78,11 +78,11 @@
 
 /* Titolo */
 .main-title {
-  font-size: 10vh;
+  font-size: 15vh; /* Con font family Sans serif mettere 10vh */
   font-weight: 600;
   color: #333333;
   margin-top: -45vh;
-  font-family: sans-serif;
+  font-family: Teko;
   margin-bottom: 2rem;
   display: inline;
   -webkit-text-stroke: 2px #ffbb00;
