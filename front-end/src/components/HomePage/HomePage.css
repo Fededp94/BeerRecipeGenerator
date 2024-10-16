@@ -174,11 +174,15 @@ body {
 .form-check {
   margin-top: 5%;
 }
-
+/* Checkbox */
 .form-check-input {
   appearance: none;
   border: 3px solid #333333;
   background-color: transparent;
+}
+
+input [type="checkbox"] {
+  accent-color: red; /* non funziona */
 }
 
 .form-check-label {
