@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import logo from "../../assets/Logo Definitivo.png";
 import "../App/App.css";
 import "../HomePage/HomePage.css";
@@ -65,6 +66,16 @@ const HomePage = () => {
       navigate("/LeMieRicette");
     }
   };
+
+  useEffect(() => {
+    // Blocco lo scroll quando sono sulla homepage
+    document.body.style.overflow = "hidden";
+
+    // Ripristino lo scroll quando esco dalla homepage
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   return (
     <div className="container-fluid homepage-container">
