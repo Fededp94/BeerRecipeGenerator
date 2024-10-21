@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import axios from "axios";
 import logo from "../../assets/Logo Definitivo.png";
 import "../App/App.css";
 import "../HomePage/HomePage.css";
@@ -9,37 +9,79 @@ import "../HomePage/HomePage.css";
 const HomePage = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
-  const [isRegistered, setIsRegistered] = useState(
-    localStorage.getItem("isRegistered") || false
-  );
+  const [isRegistered, setIsRegistered] = useState(false);
   const [formData, setFormData] = useState({
-    nome: "",
-    cognome: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
   });
   const navigate = useNavigate();
 
-  // Reset del form ogni volta che il modal si apre
   const handleStartClick = () => {
-    setIsModalVisible(true); // Apre il modal
+    setIsModalVisible(true);
     setFormData({
-      nome: "",
-      cognome: "",
+      firstname: "",
+      lastName: "",
       email: "",
       password: "",
     });
-    setIsCheckboxChecked(false); // Deseleziona la checkbox
+    setIsCheckboxChecked(false);
   };
 
   const handleCheckboxChange = () => setIsCheckboxChecked(!isCheckboxChecked);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    // Imposta lo stato come registrato e salva nel localStorage (DA CAMBIARE CON BACKEND)
-    setIsRegistered(true);
-    localStorage.setItem("isRegistered", true);
-    setIsModalVisible(false);
+
+    if (!isCheckboxChecked) {
+      alert("Devi essere maggiorenne per registrarti!");
+      return;
+    }
+
+    console.log("Dati inviati", formData);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/register",
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("Risposta ricevuta", response.data);
+
+      if (response.status === 201 || response.status === 200) {
+        setIsRegistered(true);
+        setIsModalVisible(false);
+        alert("Registrazione completata con successo!");
+      } else {
+        alert(
+          "Errore durante la registrazione: " +
+            (response.data.message || "Errore sconosciuto")
+        );
+      }
+    } catch (error) {
+      console.error("Errore durante la richiesta di registrazione:", error);
+
+      if (error.response) {
+        alert(
+          "Errore dal server: " +
+            (error.response.data.message ||
+              error.response.data ||
+              "Errore sconosciuto")
+        );
+      } else if (error.request) {
+        alert(
+          "Nessuna risposta dal server. Verifica la connessione e riprova."
+        );
+      } else {
+        alert("Errore nella preparazione della richiesta: " + error.message);
+      }
+    }
   };
 
   const handleProceedClick = () => {
@@ -55,7 +97,6 @@ const HomePage = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("isRegistered");
     setIsRegistered(false);
   };
 
@@ -68,10 +109,7 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    // Blocco lo scroll quando sono sulla homepage
     document.body.style.overflow = "hidden";
-
-    // Ripristino lo scroll quando esco dalla homepage
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -86,7 +124,6 @@ const HomePage = () => {
           Le mie ricette
         </button>
 
-        {/* Pulsante di Logout che appare solo dopo la registrazione */}
         {isRegistered && (
           <button
             className="btn btn-dark btn-lg navbar-button custom-button ml-3"
@@ -135,31 +172,32 @@ const HomePage = () => {
                 type="button"
                 className="btn-close modal-close-button"
                 aria-label="Close"
-                onClick={() => setIsModalVisible(false)}></button>
+                onClick={() => setIsModalVisible(false)}
+              />
               <div className="modal-header">
                 <h5 className="modal-title">Devi registrarti per proseguire</h5>
               </div>
               <div className="modal-body">
                 <form onSubmit={handleFormSubmit}>
                   <div className="form-group">
-                    <label htmlFor="nome">Iniziamo dal nome</label>
+                    <label htmlFor="firstName">Iniziamo dal nome</label>
                     <input
                       type="text"
                       className="form-control"
-                      id="nome"
-                      name="nome"
+                      id="firstName"
+                      name="firstName"
                       value={formData.nome}
                       onChange={handleInputChange}
                       required
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="cognome">Ora il cognome</label>
+                    <label htmlFor="lastName">Ora il cognome</label>
                     <input
                       type="text"
                       className="form-control"
-                      id="cognome"
-                      name="cognome"
+                      id="lastName"
+                      name="lastName"
                       value={formData.cognome}
                       onChange={handleInputChange}
                       required

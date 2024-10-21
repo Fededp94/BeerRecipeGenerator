@@ -11,16 +11,37 @@ const LeMieRicette = () => {
   const [selectedRecipe, setSelectedRecipe] = useState(null);
 
   useEffect(() => {
-    const savedRecipes = JSON.parse(localStorage.getItem("savedRecipes")) || [];
-    setRecipes(savedRecipes);
+    // Funzione per caricare le ricette dal backend
+    const fetchRecipes = async () => {
+      try {
+        const response = await fetch("/api/recipes/user"); // Recupera le ricette dell'utente autenticato
+        if (response.ok) {
+          const data = await response.json();
+          setRecipes(data);
+        } else {
+          console.error("Errore durante il caricamento delle ricette");
+        }
+      } catch (error) {
+        console.error("Errore durante la richiesta al server:", error);
+      }
+    };
+
+    fetchRecipes();
   }, []);
 
-  const handleDeleteRecipe = (index) => {
-    const updatedRecipes = recipes.filter((_, i) => i !== index);
-    setRecipes(updatedRecipes);
-    localStorage.setItem("savedRecipes", JSON.stringify(updatedRecipes));
-    if (selectedRecipe === index) {
-      setSelectedRecipe(null);
+  const handleDeleteRecipe = async (recipeId) => {
+    try {
+      const response = await fetch(`/api/recipes/${recipeId}`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        setRecipes(recipes.filter((recipe) => recipe.id !== recipeId));
+        setSelectedRecipe(null);
+      } else {
+        console.error("Errore durante la cancellazione della ricetta");
+      }
+    } catch (error) {
+      console.error("Errore durante la cancellazione della ricetta:", error);
     }
   };
 
@@ -64,7 +85,7 @@ const LeMieRicette = () => {
               <div className="recipes-grid">
                 {recipes.map((recipe, index) => (
                   <div
-                    key={index}
+                    key={recipe.id} // Cambiato da index a recipe.id
                     className={`recipe-card ${
                       selectedRecipe === index ? "selected" : ""
                     }`}
@@ -80,7 +101,7 @@ const LeMieRicette = () => {
                         className="btn btn-danger btn-sm delete-btn"
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleDeleteRecipe(index);
+                          handleDeleteRecipe(recipe.id); // Passa l'ID della ricetta
                         }}>
                         Elimina
                       </button>
