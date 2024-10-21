@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./components/AuthContext/AuthContext.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./components/App/App.css";
@@ -10,14 +11,16 @@ import LeMieRicette from "./components/LeMieRicette/LeMieRicette.jsx";
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/play" element={<PlayPage />} />
-        <Route path="/result" element={<ResultPage />} />
-        <Route path="/lemiericette" element={<LeMieRicette />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/play" element={<PlayPage />} />
+          <Route path="/result" element={<ResultPage />} />
+          <Route path="/lemiericette" element={<LeMieRicette />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 };
 

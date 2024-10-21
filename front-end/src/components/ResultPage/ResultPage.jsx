@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../AuthContext/AuthContext.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../ResultPage/ResultPage.css";
 import "../App/App.css";
 
 const ResultPage = () => {
+  const { user } = useAuth();
   const location = useLocation();
   const { malts, hops, yeast, beerName } = location.state || {};
   const navigate = useNavigate();
@@ -24,82 +26,74 @@ const ResultPage = () => {
 
   const calculateAlcoholContent = (weights) => {
     let totalKg = 0;
-
-    Object.entries(weights).forEach(([_, weight]) => {
-      const numericWeight = parseFloat(weight) || 0;
-      totalKg += numericWeight;
+    Object.values(weights).forEach((weight) => {
+      totalKg += parseFloat(weight) || 0;
     });
-
     const alcoholPercentage = (totalKg / 10) * 8;
     return Math.min(Math.max(alcoholPercentage.toFixed(1), 0), 100);
   };
 
   const handleConfirm = () => {
-    const scaledWeights = {};
-    Object.entries(maltWeights).forEach(([malt, weight]) => {
-      if (weight) {
-        scaledWeights[malt] = parseFloat(weight);
-      }
-    });
+    const scaledWeights = Object.fromEntries(
+      Object.entries(maltWeights).filter(([_, weight]) => weight !== "")
+    );
 
+    // Cambia beerName in name per corrispondere al backend
     setFinalRecipe({
-      beerName,
-      malts: scaledWeights,
-      hops,
-      yeast,
+      name: beerName, // Modifica da beerName a name
+      malts: Object.keys(scaledWeights), // Invio solo gli ID (nomi) dei malti
+      hops: hops, // Lista di ID (nomi) luppoli
+      yeasts: [yeast], // Lista contenente il lievito (in backend è 'yeasts')
       estimatedAlcohol: calculateAlcoholContent(scaledWeights),
     });
   };
 
   const getEmoji = (percentage) => {
-    if (percentage >= 0 && percentage <= 4) {
-      return "😢";
-    } else if (percentage > 4 && percentage <= 5.9) {
-      return "😊";
-    } else {
-      return "😁";
-    }
+    if (percentage >= 0 && percentage <= 4) return "😢";
+    if (percentage > 4 && percentage <= 5.9) return "😊";
+    return "😁";
   };
 
-  // Funzione aggiornata per gestire il salvataggio della ricetta
-  const handleSaveRecipe = () => {
+  const handleSaveRecipe = async () => {
     if (!finalRecipe) {
       alert("Per favore, conferma prima la ricetta");
       return;
     }
+    if (!user) {
+      alert("Devi essere loggato per salvare la ricetta");
+      navigate("/"); // Redirect to home/login page
+      return;
+    }
 
-    // Recupera le ricette esistenti dal localStorage
-    const existingRecipes =
-      JSON.parse(localStorage.getItem("savedRecipes")) || [];
-
-    // Controlla se una ricetta con lo stesso nome esiste già
-    const recipeExists = existingRecipes.some(
-      (recipe) => recipe.beerName === finalRecipe.beerName
-    );
-
-    if (recipeExists) {
-      const shouldOverwrite = window.confirm(
-        "Esiste già una ricetta con questo nome. Vuoi sovrascriverla?"
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/recipes",
+        { ...finalRecipe, userEmail: user.email }, // userEmail invece di userId
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`, // Assicurati di avere un token JWT
+          },
+        }
       );
-      if (shouldOverwrite) {
-        const updatedRecipes = existingRecipes.map((recipe) =>
-          recipe.beerName === finalRecipe.beerName ? finalRecipe : recipe
-        );
-        localStorage.setItem("savedRecipes", JSON.stringify(updatedRecipes));
-        alert("Ricetta aggiornata con successo!");
+
+      if (response.status === 201 || response.status === 200) {
+        alert("Ricetta salvata con successo nel database!");
+      } else {
+        throw new Error(response.data.message || "Errore sconosciuto");
       }
-    } else {
-      // Aggiungi la nuova ricetta
-      const updatedRecipes = [...existingRecipes, finalRecipe];
-      localStorage.setItem("savedRecipes", JSON.stringify(updatedRecipes));
-      alert("Ricetta salvata con successo!");
+    } catch (error) {
+      console.error("Errore durante il salvataggio della ricetta:", error);
+      alert(
+        "Errore nel salvataggio della ricetta: " +
+          (error.response?.data?.message || error.message)
+      );
     }
   };
 
   return (
     <div>
       <div className="navbar"></div>
-
       <div className="container">
         <div className="recipe-container">
           <div className="recipe-section">
@@ -146,13 +140,16 @@ const ResultPage = () => {
             <h2>Ricetta Finale (25 Litri)</h2>
             {finalRecipe ? (
               <>
-                <div className="recipe-name">{finalRecipe.beerName}</div>
+                <div className="recipe-name">{finalRecipe.name}</div>
                 <div>
                   <h3>Malti:</h3>
                   <ul>
-                    {Object.entries(finalRecipe.malts).map(([malt, weight]) => (
+                    {finalRecipe.malts?.map((malt) => (
                       <li key={malt}>
-                        {malt}: <span className="malt-amount">{weight} kg</span>
+                        {malt}:{" "}
+                        <span className="malt-amount">
+                          {maltWeights[malt]} kg
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -167,7 +164,7 @@ const ResultPage = () => {
                 </div>
                 <div>
                   <h3>Lieviti:</h3>
-                  <p>{finalRecipe.yeast || "None"}</p>
+                  <p>{finalRecipe.yeasts?.[0] || "None"}</p>
                 </div>
                 <div className="alcohol-content">
                   Alcol Stimato: {finalRecipe.estimatedAlcohol}%{" "}

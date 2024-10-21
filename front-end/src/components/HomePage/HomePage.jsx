@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../AuthContext/AuthContext.jsx";
+import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "../../assets/Logo Definitivo.png";
 import "../App/App.css";
 import "../HomePage/HomePage.css";
 
 const HomePage = () => {
+  const { user, login, logout } = useAuth();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
-  const [isRegistered, setIsRegistered] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -21,7 +22,7 @@ const HomePage = () => {
   const handleStartClick = () => {
     setIsModalVisible(true);
     setFormData({
-      firstname: "",
+      firstName: "",
       lastName: "",
       email: "",
       password: "",
@@ -39,8 +40,6 @@ const HomePage = () => {
       return;
     }
 
-    console.log("Dati inviati", formData);
-
     try {
       const response = await axios.post(
         "http://localhost:8080/api/register",
@@ -52,10 +51,8 @@ const HomePage = () => {
         }
       );
 
-      console.log("Risposta ricevuta", response.data);
-
       if (response.status === 201 || response.status === 200) {
-        setIsRegistered(true);
+        login(response.data); // Salva i dati dell'utente nel contesto
         setIsModalVisible(false);
         alert("Registrazione completata con successo!");
       } else {
@@ -97,11 +94,11 @@ const HomePage = () => {
   };
 
   const handleLogout = () => {
-    setIsRegistered(false);
+    logout();
   };
 
   const handleLeMieRicetteClick = () => {
-    if (!isRegistered) {
+    if (!user) {
       setIsModalVisible(true);
     } else {
       navigate("/LeMieRicette");
@@ -124,7 +121,7 @@ const HomePage = () => {
           Le mie ricette
         </button>
 
-        {isRegistered && (
+        {user && (
           <button
             className="btn btn-dark btn-lg navbar-button custom-button ml-3"
             onClick={handleLogout}>
@@ -140,7 +137,7 @@ const HomePage = () => {
           <img src={logo} alt="Logo del Sito" className="homepage-logo" />
         </div>
 
-        {!isRegistered && (
+        {!user && (
           <div className="start-button-container">
             <button
               className="btn btn-dark btn-lg start-button"
@@ -150,7 +147,7 @@ const HomePage = () => {
           </div>
         )}
 
-        {isRegistered && (
+        {user && (
           <div className="button-container">
             <button
               className="btn btn-dark proceed-button"
@@ -186,7 +183,7 @@ const HomePage = () => {
                       className="form-control"
                       id="firstName"
                       name="firstName"
-                      value={formData.nome}
+                      value={formData.firstName}
                       onChange={handleInputChange}
                       required
                     />
@@ -198,7 +195,7 @@ const HomePage = () => {
                       className="form-control"
                       id="lastName"
                       name="lastName"
-                      value={formData.cognome}
+                      value={formData.lastName}
                       onChange={handleInputChange}
                       required
                     />
