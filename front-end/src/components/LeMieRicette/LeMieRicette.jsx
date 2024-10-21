@@ -85,7 +85,7 @@ const LeMieRicette = () => {
               <div className="recipes-grid">
                 {recipes.map((recipe, index) => (
                   <div
-                    key={recipe.id} // Cambiato da index a recipe.id
+                    key={recipe.id}
                     className={`recipe-card ${
                       selectedRecipe === index ? "selected" : ""
                     }`}
@@ -101,7 +101,7 @@ const LeMieRicette = () => {
                         className="btn btn-danger btn-sm delete-btn"
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleDeleteRecipe(recipe.id); // Passa l'ID della ricetta
+                          handleDeleteRecipe(recipe.id);
                         }}>
                         Elimina
                       </button>

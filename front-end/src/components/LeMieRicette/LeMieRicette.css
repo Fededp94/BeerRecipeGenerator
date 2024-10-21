@@ -16,6 +16,13 @@
   font-weight: 600;
 }
 
+.recipes-list p {
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: white;
+}
+
 .recipes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
