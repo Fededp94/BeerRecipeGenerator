@@ -61,29 +61,45 @@ const ResultPage = () => {
     }
     if (!user) {
       alert("Devi essere loggato per salvare la ricetta");
-      navigate("/"); // Redirect to home/login page
+      navigate("/");
       return;
     }
 
+    // Log dei dati che stiamo per inviare
+    const requestData = {
+      name: finalRecipe.name,
+      malts: finalRecipe.malts,
+      hops: finalRecipe.hops,
+      yeasts: finalRecipe.yeasts,
+      estimatedAlcohol: finalRecipe.estimatedAlcohol,
+      userEmail: user.email,
+    };
+
+    console.log("Dati da inviare:", requestData);
+
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/recipes",
-        { ...finalRecipe, userEmail: user.email }, // userEmail invece di userId
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`, // Assicurati di avere un token JWT
-          },
-        }
-      );
+      const response = await axios({
+        method: "post",
+        url: "http://localhost:8080/api/recipes",
+        data: requestData,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+        withCredentials: true,
+      });
+
+      console.log("Risposta ricevuta:", response);
 
       if (response.status === 201 || response.status === 200) {
         alert("Ricetta salvata con successo nel database!");
-      } else {
-        throw new Error(response.data.message || "Errore sconosciuto");
       }
     } catch (error) {
-      console.error("Errore durante il salvataggio della ricetta:", error);
+      console.error("Errore completo:", error);
+      if (error.response) {
+        console.error("Dati risposta errore:", error.response.data);
+        console.error("Status errore:", error.response.status);
+      }
       alert(
         "Errore nel salvataggio della ricetta: " +
           (error.response?.data?.message || error.message)

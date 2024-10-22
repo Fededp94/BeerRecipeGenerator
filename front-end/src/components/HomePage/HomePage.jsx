@@ -41,6 +41,8 @@ const HomePage = () => {
     }
 
     try {
+      console.log("Invio dati di registrazione:", formData);
+
       const response = await axios.post(
         "http://localhost:8080/api/register",
         formData,
@@ -48,23 +50,28 @@ const HomePage = () => {
           headers: {
             "Content-Type": "application/json",
           },
+          withCredentials: false,
         }
       );
 
+      console.log("Risposta ricevuta:", response);
+
       if (response.status === 201 || response.status === 200) {
-        login(response.data); // Salva i dati dell'utente nel contesto
+        const userData = {
+          ...response.data.user,
+          token: response.data.token,
+        };
+
+        login(userData);
         setIsModalVisible(false);
         alert("Registrazione completata con successo!");
-      } else {
-        alert(
-          "Errore durante la registrazione: " +
-            (response.data.message || "Errore sconosciuto")
-        );
       }
     } catch (error) {
-      console.error("Errore durante la richiesta di registrazione:", error);
+      console.error("Errore dettagliato:", error);
 
       if (error.response) {
+        console.log("Dati risposta errore:", error.response.data);
+        console.log("Status errore:", error.response.status);
         alert(
           "Errore dal server: " +
             (error.response.data.message ||
@@ -72,10 +79,12 @@ const HomePage = () => {
               "Errore sconosciuto")
         );
       } else if (error.request) {
+        console.log("Errore richiesta:", error.request);
         alert(
           "Nessuna risposta dal server. Verifica la connessione e riprova."
         );
       } else {
+        console.log("Errore configurazione:", error.message);
         alert("Errore nella preparazione della richiesta: " + error.message);
       }
     }
