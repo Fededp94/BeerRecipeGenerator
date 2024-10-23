@@ -1,7 +1,9 @@
+/* Impostazioni base */
 body {
-  overflow: hidden; /* rimuovo lo scrolling su tutto il body */
+  overflow: hidden;
 }
 
+/* Header */
 .navbar-header {
   background-color: #333333;
   width: 100%;
@@ -12,10 +14,10 @@ body {
   padding: 0 20px;
 }
 
-/* Bottone le mie ricette */
+/* Bottoni navbar */
 .navbar-button {
   font-family: sans-serif;
-  font-weight: 400;
+  font-weight: 600;
   background-color: #ffbb00;
   color: white;
   border: none;
@@ -26,42 +28,6 @@ body {
 .navbar-button:hover {
   background-color: #ffbb00;
   color: #333333;
-}
-
-.start-button {
-  font-family: sans-serif;
-  font-weight: 400;
-  background-color: #ffbb00;
-  color: white;
-  border: none;
-  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
-  font-size: 2rem;
-  margin: 5vh;
-}
-
-.start-button:hover {
-  background-color: #ffbb00;
-  color: #333333;
-}
-
-/* Dropdown styles */
-.custom-dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: white;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  padding: 10px;
-  display: none;
-  z-index: 1000;
-  width: 200px;
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.custom-dropdown.open {
-  display: block;
 }
 
 /* Homepage container */
@@ -82,7 +48,7 @@ body {
 
 /* Titolo */
 .main-title {
-  font-size: 15vh; /* Con font family Sans serif mettere 10vh */
+  font-size: 15vh;
   font-weight: 600;
   color: #333333;
   margin-top: -45vh;
@@ -113,6 +79,22 @@ body {
   margin-left: 5vh;
 }
 
+.start-button {
+  font-family: sans-serif;
+  font-weight: 400;
+  background-color: #ffbb00;
+  color: white;
+  border: none;
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+  font-size: 2rem;
+  margin: 5vh;
+}
+
+.start-button:hover {
+  background-color: #ffbb00;
+  color: #333333;
+}
+
 .proceed-button {
   position: fixed;
   bottom: 60px;
@@ -132,7 +114,7 @@ body {
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Dropdown registrazione */
+/* Modali */
 .registration-modal {
   backdrop-filter: blur(5px);
   background-color: rgba(255, 255, 255, 0.8);
@@ -165,6 +147,7 @@ body {
 .form-control {
   background-color: #333333;
   border: none;
+  color: white;
 }
 
 .form-control:active {
@@ -174,15 +157,15 @@ body {
 .form-check {
   margin-top: 5%;
 }
-/* Checkbox */
+
 .form-check-input {
   appearance: none;
   border: 3px solid #333333;
   background-color: transparent;
 }
 
-input [type="checkbox"] {
-  accent-color: red; /* non funziona */
+.form-check-input:checked {
+  background-color: #333333;
 }
 
 .form-check-label {
@@ -206,6 +189,7 @@ input:focus {
   font-weight: 600;
   background-color: #333333;
   border: none;
+  color: white;
 }
 
 .btn-success:hover {
@@ -214,8 +198,7 @@ input:focus {
   border: none;
 }
 
-/* button Le mie ricette */
-
+/* Button Le mie ricette */
 .custom-btn {
   font-family: sans-serif;
   font-weight: 600;
@@ -233,4 +216,120 @@ input:focus {
   font-weight: 600;
   margin-left: 2vh;
   width: 18vh;
+}
+
+/* Media Queries per tablet e mobile */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .navbar-header {
+    height: auto;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .nav-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .navbar-button {
+    margin: 0.5vh;
+    font-size: 0.9rem;
+  }
+
+  .main-title {
+    font-size: 8vh;
+    margin-top: 2vh;
+    text-align: center;
+    -webkit-text-stroke: 2px #ffbb00;
+  }
+
+  .logo-container {
+    margin-top: 2vh;
+    padding: 0 1rem;
+  }
+
+  .homepage-logo {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .start-button-container {
+    margin-top: 2vh;
+    margin-left: 0;
+  }
+
+  .start-button {
+    font-size: 1.5rem;
+    margin: 2vh;
+  }
+
+  .proceed-button {
+    position: static;
+    margin-top: 2vh;
+    font-size: 1.5rem;
+  }
+
+  .modal-dialog {
+    margin: 1rem;
+  }
+
+  .modal-content {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 6vh;
+    -webkit-text-stroke: 1px #ffbb00;
+  }
+
+  .navbar-button {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
+
+  .homepage-logo {
+    max-width: 300px;
+  }
+
+  .start-button {
+    font-size: 1.2rem;
+  }
+
+  .proceed-button {
+    font-size: 1.2rem;
+  }
+
+  .modal-title {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .main-title {
+    font-size: 6vh;
+    margin-top: 10vh;
+  }
+
+  .logo-container {
+    margin-top: 2vh;
+  }
+
+  .homepage-logo {
+    max-width: 400px;
+  }
+
+  .start-button-container {
+    margin-top: 2vh;
+  }
 }

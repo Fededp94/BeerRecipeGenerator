@@ -99,103 +99,100 @@ const ResultPage = () => {
   };
 
   return (
-    <div>
-      <div className="navbar"></div>
-      <div className="container">
-        <div className="recipe-container">
-          <div className="recipe-section">
-            <h3>Nome della Birra:</h3>
-            {beerName ? (
-              <div className="beer-name">{beerName}</div>
-            ) : (
-              <p>Il nome della birra non è stato inserito</p>
-            )}
-            <div>
-              <h3>Malti:</h3>
-              {malts?.map((malt) => (
-                <div key={malt} className="malt-input">
-                  <span>{malt}</span>
-                  <input
-                    type="number"
-                    value={maltWeights[malt]}
-                    onChange={(e) => handleWeightChange(malt, e.target.value)}
-                    placeholder="kg"
-                  />
-                </div>
+    <div className="container">
+      <div className="recipe-container">
+        <div className="recipe-section">
+          <h3>Nome della Birra:</h3>
+          {beerName ? (
+            <div className="beer-name">{beerName}</div>
+          ) : (
+            <p>Il nome della birra non è stato inserito</p>
+          )}
+          <div>
+            <h3>Malti:</h3>
+            {malts?.map((malt) => (
+              <div key={malt} className="malt-input">
+                <span>{malt}</span>
+                <input
+                  type="number"
+                  value={maltWeights[malt]}
+                  onChange={(e) => handleWeightChange(malt, e.target.value)}
+                  placeholder="kg"
+                />
+              </div>
+            ))}
+          </div>
+          <div>
+            <h3>Luppoli:</h3>
+            <ul>
+              {hops?.map((hop) => (
+                <li key={hop}>{hop}</li>
               ))}
-            </div>
-            <div>
-              <h3>Luppoli:</h3>
-              <ul>
-                {hops?.map((hop) => (
-                  <li key={hop}>{hop}</li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3>Lieviti:</h3>
-              <p>{yeast || "None"}</p>
-            </div>
-            <div className="button-container">
-              <button className="confirm-button" onClick={handleConfirm}>
-                Conferma Ricetta
-              </button>
-            </div>
+            </ul>
           </div>
-
-          <div className="recipe-section final-recipe custom-recipe">
-            <h2>Ricetta Finale (25 Litri)</h2>
-            {finalRecipe ? (
-              <>
-                <div className="recipe-name">{finalRecipe.name}</div>
-                <div>
-                  <h3>Malti:</h3>
-                  <ul>
-                    {finalRecipe.malts?.map((malt) => (
-                      <li key={malt}>
-                        {malt}:{" "}
-                        <span className="malt-amount">
-                          {maltWeights[malt]} kg
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h3>Luppoli:</h3>
-                  <ul>
-                    {finalRecipe.hops?.map((hop) => (
-                      <li key={hop}>{hop}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h3>Lieviti:</h3>
-                  <p>{finalRecipe.yeasts?.[0] || "None"}</p>
-                </div>
-                <div className="alcohol-content">
-                  Alcol Stimato: {finalRecipe.estimatedAlcohol}%{" "}
-                  {getEmoji(finalRecipe.estimatedAlcohol)}
-                </div>
-
-                <div className="button-group">
-                  <button
-                    className="btn-confirm"
-                    onClick={() => navigate("/lemiericette")}>
-                    Le mie ricette
-                  </button>
-                  <button className="btn-confirm" onClick={handleSaveRecipe}>
-                    Salva ricetta
-                  </button>
-                  <button className="btn-confirm" onClick={() => navigate("/")}>
-                    Ricomincia
-                  </button>
-                </div>
-              </>
-            ) : (
-              <p>Conferma la ricetta per vedere il calcolo finale</p>
-            )}
+          <div>
+            <h3>Lieviti:</h3>
+            <p>{yeast || "None"}</p>
           </div>
+          <div className="button-container">
+            <button className="confirm-button" onClick={handleConfirm}>
+              Conferma Ricetta
+            </button>
+          </div>
+        </div>
+
+        <div className="recipe-section final-recipe custom-recipe">
+          <h2>Ricetta Finale (25 Litri)</h2>
+          {finalRecipe ? (
+            <>
+              <div className="recipe-name">{finalRecipe.name}</div>
+              <div>
+                <h3>Malti:</h3>
+                <ul>
+                  {finalRecipe.malts?.map((malt) => (
+                    <li key={malt}>
+                      {malt}:{" "}
+                      <span className="malt-amount">
+                        {maltWeights[malt]} kg
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3>Luppoli:</h3>
+                <ul>
+                  {finalRecipe.hops?.map((hop) => (
+                    <li key={hop}>{hop}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3>Lieviti:</h3>
+                <p>{finalRecipe.yeasts?.[0] || "None"}</p>
+              </div>
+              <div className="alcohol-content">
+                Alcol Stimato: {finalRecipe.estimatedAlcohol}%{" "}
+                {getEmoji(finalRecipe.estimatedAlcohol)}
+              </div>
+
+              <div className="button-group">
+                <button
+                  className="btn-confirm"
+                  onClick={() => navigate("/lemiericette")}>
+                  Le mie ricette
+                </button>
+                <button className="btn-confirm" onClick={handleSaveRecipe}>
+                  Salva ricetta
+                </button>
+                <button className="btn-confirm" onClick={() => navigate("/")}>
+                  Ricomincia
+                </button>
+              </div>
+            </>
+          ) : (
+            <p>Conferma la ricetta per vedere il calcolo finale</p>
+          )}
         </div>
       </div>
     </div>

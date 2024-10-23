@@ -177,36 +177,32 @@ const HomePage = () => {
   return (
     <div className="container-fluid homepage-container">
       <header className="navbar-header">
-        {!user ? (
-          <>
-            <button
-              className="btn btn-dark btn-lg navbar-button custom-btn"
-              onClick={handleLoginClick}>
-              Login
-            </button>
-            <button
-              className="btn btn-dark btn-lg navbar-button custom-btn"
-              onClick={handleSignupClick}>
-              Signup
-            </button>
-          </>
-        ) : (
-          <>
-            <button
-              className="btn btn-dark btn-lg navbar-button custom-btn"
-              onClick={handleLeMieRicetteClick}>
-              Le mie ricette
-            </button>
-            <button
-              className="btn btn-dark btn-lg navbar-button custom-button ml-3"
-              onClick={handleLogout}>
-              Logout
-            </button>
-          </>
-        )}
+        <div className="nav-buttons">
+          {!user ? (
+            <>
+              <button className="btn navbar-button" onClick={handleLoginClick}>
+                Login
+              </button>
+              <button className="btn navbar-button" onClick={handleSignupClick}>
+                Signup
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                className="btn navbar-button"
+                onClick={handleLeMieRicetteClick}>
+                Le mie ricette
+              </button>
+              <button className="btn navbar-button" onClick={handleLogout}>
+                Logout
+              </button>
+            </>
+          )}
+        </div>
       </header>
 
-      <div className="homepage-content">
+      <main className="homepage-content">
         <h1 className="main-title">BEER RECIPE GENERATOR</h1>
 
         <div className="logo-container">
@@ -215,24 +211,20 @@ const HomePage = () => {
 
         {!user && (
           <div className="start-button-container">
-            <button
-              className="btn btn-dark btn-lg start-button"
-              onClick={handleStartClick}>
+            <button className="btn start-button" onClick={handleStartClick}>
               Iniziamo!
             </button>
           </div>
         )}
 
         {user && (
-          <div className="button-container">
-            <button
-              className="btn btn-dark proceed-button"
-              onClick={handleProceedClick}>
+          <div className="proceed-button-container">
+            <button className="btn proceed-button" onClick={handleProceedClick}>
               PUOI PROCEDERE
             </button>
           </div>
         )}
-      </div>
+      </main>
 
       {/* Modale di Login */}
       {isLoginModalVisible && (
