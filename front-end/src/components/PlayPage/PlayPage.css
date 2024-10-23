@@ -1,9 +1,7 @@
-/* Per regole, dropdown sovrapposto */
-.navbar .dropdown-menu {
+/* Layout di base */
+#play-page-container {
   position: absolute;
-  top: 100%;
-  background-color: white;
-  z-index: 999;
+  width: 100%;
 }
 
 header {
@@ -12,9 +10,12 @@ header {
   height: 10vh;
 }
 
-.dropdown-menu {
-  background-color: #f1f1f1;
-  position: relative;
+/* Navbar e Dropdown Regole */
+.navbar .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  background-color: white;
+  z-index: 999;
 }
 
 .nav-link {
@@ -22,7 +23,6 @@ header {
   margin-right: 60vh;
 }
 
-/* Menu a tendina regole */
 .custom-dropdown {
   position: absolute;
   top: 50px;
@@ -34,6 +34,11 @@ header {
   font-family: sans-serif;
   font-weight: 600;
   font-size: 1rem;
+}
+
+.dropdown-menu {
+  background-color: #f1f1f1;
+  position: relative;
 }
 
 .dropdown-item:hover {
@@ -50,33 +55,18 @@ header {
   border: none;
 }
 
-.beer-name-input:hover {
-  border: none;
-}
-
-.input-filled {
-  background-color: #ffbb00;
-  border-radius: 5px;
-  border: 3px solid white;
-  font-family: sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
-  color: #333333;
-}
-
-.input-filled::placeholder {
-  font-family: sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #333333;
-}
-
+.input-filled,
 .input-empty {
   background-color: #ffbb00;
   border: 3px solid white;
   border-radius: 5px;
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #333333;
 }
 
+.input-filled::placeholder,
 .input-empty::placeholder {
   font-family: sans-serif;
   font-size: 1rem;
@@ -84,11 +74,7 @@ header {
   color: #333333;
 }
 
-/* Layout generale */
-#play-page-container {
-  position: absolute;
-}
-
+/* Layout principale e contenitori */
 .buttons-container {
   display: flex;
   flex-direction: row;
@@ -97,7 +83,7 @@ header {
   margin-top: -35%;
 }
 
-/* Pulsanti Malti, Luppoli, Lieviti */
+/* Pulsanti principali */
 .malts-btn,
 .hops-btn,
 .yeast-btn {
@@ -112,6 +98,7 @@ header {
   color: white;
   box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.3),
     inset 0px -2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
 .malts-btn:hover,
@@ -120,7 +107,7 @@ header {
   transform: translateY(-5px);
 }
 
-/* Tendine Malti,Luppoli,lieviti */
+/* Dropdown contenuti */
 .dropdown-content {
   display: none;
   position: absolute;
@@ -134,17 +121,11 @@ header {
   font-weight: 500;
 }
 
-/* Dropdown tendina luppoli e lievito */
 .dropdown-content a {
   color: #333333;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
-}
-
-.dropdown-content a {
-  text-decoration: none;
-  color: black;
 }
 
 .dropdown-content a:hover {
@@ -156,13 +137,21 @@ header {
   margin-bottom: 5px;
 }
 
-/* Mostra il dropdown al click */
+.dropdown-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 .show {
   display: block;
 }
 
-/* Icone Info */
+.selected {
+  background-color: #ffbb00;
+}
 
+/* Icone Info */
 .info-container {
   float: right;
   margin-left: 5px;
@@ -178,24 +167,7 @@ header {
   color: #0056b3;
 }
 
-/* Controller Pinta */
-.pinta-container {
-  position: absolute;
-  margin-left: -30%;
-  right: 20%;
-  top: 25%;
-}
-
-.dropdown-content ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.selected {
-  background-color: #ffbb00;
-}
-/* Contenitore immagine pinta */
+/* Immagine Pinta */
 .beer-glass {
   width: 50%;
   height: 80vh;
@@ -206,12 +178,15 @@ header {
   margin: 5vh;
 }
 
-/* Pulsante Genera! */
+/* Pulsante Genera */
 .generate-container {
   position: absolute;
   margin-left: 47%;
   margin-top: 20%;
   min-width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .generate-btn {
@@ -235,11 +210,10 @@ header {
   transform: translateY(-5px);
 }
 
-/* Messaggio di errore */
+/* Messaggio errore */
 .error-message {
   white-space: pre-line;
   margin-bottom: 10px;
-  font-size: 14px;
   padding: 10px 15px;
   border-radius: 4px;
   background-color: #f8d7da;
@@ -254,8 +228,284 @@ header {
   font-weight: 600;
 }
 
-.generate-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Media Queries */
+@media (max-width: 1200px) {
+  .buttons-container {
+    margin-top: -25%;
+  }
+
+  .malts-btn,
+  .hops-btn,
+  .yeast-btn {
+    width: 250px;
+    height: 80px;
+    font-size: 1.5rem;
+  }
+
+  .beer-glass {
+    width: 45%;
+    height: 70vh;
+  }
+
+  .generate-btn {
+    min-width: 60%;
+    min-height: 12vh;
+  }
+
+  .custom-dropdown {
+    width: 50vh;
+  }
+}
+
+@media (max-width: 992px) {
+  .buttons-container {
+    margin-top: -15%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .malts-btn,
+  .hops-btn,
+  .yeast-btn {
+    width: 200px;
+    height: 60px;
+    font-size: 1.2rem;
+    margin: 5px;
+  }
+
+  .dropdown-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    z-index: 1000;
+  }
+
+  .beer-glass {
+    width: 40%;
+    height: 60vh;
+    margin: 2vh;
+  }
+
+  .generate-container {
+    position: relative;
+    margin: 2rem auto;
+    text-align: center;
+  }
+
+  .generate-btn {
+    min-width: 50%;
+    min-height: 10vh;
+    font-size: 1.5rem;
+  }
+
+  .custom-dropdown {
+    width: 40vh;
+  }
+
+  .nav-link {
+    margin-right: 30vh;
+  }
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+  header {
+    width: 100%;
+  }
+
+  .buttons-container {
+    position: relative;
+    margin-top: 2rem;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 30%;
+    padding-left: 2rem;
+  }
+
+  .malts-btn,
+  .hops-btn,
+  .yeast-btn {
+    width: 250px;
+    height: 80px;
+    font-size: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .beer-glass {
+    position: absolute;
+    top: 15vh;
+    right: 10%;
+    width: 40%;
+    height: 60vh;
+  }
+
+  .generate-container {
+    position: absolute;
+    bottom: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    margin: 0;
+  }
+
+  .generate-btn {
+    min-width: 300px;
+    min-height: 12vh;
+  }
+
+  .dropdown-content {
+    left: 100%;
+    top: 0;
+    transform: none;
+  }
+}
+
+@media (max-width: 992px) {
+  header {
+    width: 100%;
+  }
+
+  .buttons-container {
+    margin-top: 2rem;
+    padding-left: 1rem;
+    width: 35%;
+  }
+
+  .malts-btn,
+  .hops-btn,
+  .yeast-btn {
+    width: 200px;
+    height: 60px;
+    font-size: 1.2rem;
+  }
+
+  .beer-glass {
+    right: 5%;
+    width: 45%;
+    height: 50vh;
+  }
+
+  .dropdown-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    z-index: 1000;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    width: 100%;
+    height: auto;
+    min-height: 10vh;
+  }
+
+  .buttons-container {
+    margin-top: 1rem;
+    width: 40%;
+  }
+
+  .malts-btn,
+  .hops-btn,
+  .yeast-btn {
+    width: 180px;
+    height: 50px;
+    font-size: 1.1rem;
+  }
+
+  .beer-glass {
+    top: 20vh;
+    right: 2%;
+    width: 50%;
+    height: 40vh;
+  }
+
+  .generate-container {
+    bottom: 2vh;
+  }
+
+  .generate-btn {
+    min-width: 250px;
+    min-height: 10vh;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .buttons-container {
+    margin-top: 1rem;
+    width: 100%;
+    align-items: center;
+    padding: 0;
+  }
+
+  .malts-btn,
+  .hops-btn,
+  .yeast-btn {
+    width: 160px;
+    height: 45px;
+    font-size: 1rem;
+  }
+
+  .beer-glass {
+    position: relative;
+    top: 0;
+    right: 0;
+    width: 70%;
+    height: auto;
+    margin: 1rem auto;
+    display: block;
+  }
+
+  .generate-container {
+    position: relative;
+    bottom: 0;
+    margin-top: 1rem;
+  }
+
+  .generate-btn {
+    min-width: 200px;
+    min-height: 8vh;
+    font-size: 1.1rem;
+  }
+
+  .dropdown-content {
+    width: 90%;
+    max-width: 300px;
+  }
+
+  .custom-dropdown {
+    width: 90%;
+    right: 5%;
+  }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .buttons-container {
+    margin-top: 1rem;
+  }
+
+  .beer-glass {
+    height: 45vh;
+    width: auto;
+  }
+
+  .generate-container {
+    bottom: 1vh;
+  }
+
+  .generate-btn {
+    min-height: 6vh;
+  }
+
+  .malts-btn,
+  .hops-btn,
+  .yeast-btn {
+    height: 40px;
+    margin: 0.5rem 0;
+  }
 }
