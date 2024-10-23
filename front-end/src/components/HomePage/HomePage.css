@@ -63,12 +63,17 @@ body {
   margin: 2rem 0;
   margin-top: -30vh;
 }
-
+/* logo BR */
 .homepage-logo {
   width: 900px;
   height: auto;
-  opacity: var(--logo-opacity);
-  transition: opacity 1s ease-in-out;
+  opacity: 0;
+  transition: opacity 1.5s ease-in;
+}
+
+/* Animazione */
+.homepage-logo.show-logo {
+  opacity: 1;
 }
 
 /* Button */

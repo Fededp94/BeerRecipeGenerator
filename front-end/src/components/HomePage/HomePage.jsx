@@ -12,6 +12,7 @@ const HomePage = () => {
   const [isRegisterModalVisible, setIsRegisterModalVisible] = useState(false);
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+  const [showLogo, setShowLogo] = useState(false); // Aggiunto qui lo state per il logo
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -169,8 +170,15 @@ const HomePage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     document.body.style.overflow = "hidden";
+
+    // Timer per animazione
+    const timer = setTimeout(() => {
+      setShowLogo(true);
+    }, 200);
+
     return () => {
       document.body.style.overflow = "auto";
+      clearTimeout(timer);
     };
   }, []);
 
@@ -206,7 +214,11 @@ const HomePage = () => {
         <h1 className="main-title">BEER RECIPE GENERATOR</h1>
 
         <div className="logo-container">
-          <img src={logo} alt="Logo del Sito" className="homepage-logo" />
+          <img
+            src={logo}
+            alt="Logo del Sito"
+            className={`homepage-logo ${showLogo ? "show-logo" : ""}`}
+          />
         </div>
 
         {!user && (
