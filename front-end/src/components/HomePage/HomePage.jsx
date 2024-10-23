@@ -9,7 +9,8 @@ import "../HomePage/HomePage.css";
 
 const HomePage = () => {
   const { user, login, logout } = useAuth();
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isRegisterModalVisible, setIsRegisterModalVisible] = useState(false);
+  const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -17,10 +18,14 @@ const HomePage = () => {
     email: "",
     password: "",
   });
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
   const navigate = useNavigate();
 
   const handleStartClick = () => {
-    setIsModalVisible(true);
+    setIsRegisterModalVisible(true);
     setFormData({
       firstName: "",
       lastName: "",
@@ -28,6 +33,18 @@ const HomePage = () => {
       password: "",
     });
     setIsCheckboxChecked(false);
+  };
+
+  const handleSignupClick = () => {
+    handleStartClick();
+  };
+
+  const handleLoginClick = () => {
+    setIsLoginModalVisible(true);
+    setLoginData({
+      email: "",
+      password: "",
+    });
   };
 
   const handleCheckboxChange = () => setIsCheckboxChecked(!isCheckboxChecked);
@@ -63,7 +80,7 @@ const HomePage = () => {
         };
 
         login(userData);
-        setIsModalVisible(false);
+        setIsRegisterModalVisible(false);
         alert("Registrazione completata con successo!");
       }
     } catch (error) {
@@ -90,6 +107,45 @@ const HomePage = () => {
     }
   };
 
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const loginUserData = {
+        firstName: "",
+        lastName: "",
+        email: loginData.email,
+        password: loginData.password,
+      };
+
+      const response = await axios.post(
+        "http://localhost:8080/api/login",
+        loginUserData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: false,
+        }
+      );
+
+      if (response.status === 200) {
+        const userData = {
+          ...response.data.user,
+          token: response.data.token,
+        };
+        login(userData);
+        setIsLoginModalVisible(false);
+        alert("Login effettuato con successo!");
+      }
+    } catch (error) {
+      console.error("Errore durante il login:", error);
+      alert(
+        error.response?.data ||
+          "Errore durante il login. Verifica le tue credenziali."
+      );
+    }
+  };
+
   const handleProceedClick = () => {
     navigate("/play");
   };
@@ -107,11 +163,7 @@ const HomePage = () => {
   };
 
   const handleLeMieRicetteClick = () => {
-    if (!user) {
-      setIsModalVisible(true);
-    } else {
-      navigate("/LeMieRicette");
-    }
+    navigate("/LeMieRicette");
   };
 
   useEffect(() => {
@@ -125,18 +177,32 @@ const HomePage = () => {
   return (
     <div className="container-fluid homepage-container">
       <header className="navbar-header">
-        <button
-          className="btn btn-dark btn-lg navbar-button custom-btn"
-          onClick={handleLeMieRicetteClick}>
-          Le mie ricette
-        </button>
-
-        {user && (
-          <button
-            className="btn btn-dark btn-lg navbar-button custom-button ml-3"
-            onClick={handleLogout}>
-            Logout
-          </button>
+        {!user ? (
+          <>
+            <button
+              className="btn btn-dark btn-lg navbar-button custom-btn"
+              onClick={handleLoginClick}>
+              Login
+            </button>
+            <button
+              className="btn btn-dark btn-lg navbar-button custom-btn"
+              onClick={handleSignupClick}>
+              Signup
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              className="btn btn-dark btn-lg navbar-button custom-btn"
+              onClick={handleLeMieRicetteClick}>
+              Le mie ricette
+            </button>
+            <button
+              className="btn btn-dark btn-lg navbar-button custom-button ml-3"
+              onClick={handleLogout}>
+              Logout
+            </button>
+          </>
         )}
       </header>
 
@@ -168,7 +234,8 @@ const HomePage = () => {
         )}
       </div>
 
-      {isModalVisible && (
+      {/* Modale di Login */}
+      {isLoginModalVisible && (
         <div
           className="modal show registration-modal"
           tabIndex="-1"
@@ -179,7 +246,64 @@ const HomePage = () => {
                 type="button"
                 className="btn-close modal-close-button"
                 aria-label="Close"
-                onClick={() => setIsModalVisible(false)}
+                onClick={() => setIsLoginModalVisible(false)}
+              />
+              <div className="modal-header">
+                <h5 className="modal-title">Accedi al tuo account</h5>
+              </div>
+              <div className="modal-body">
+                <form onSubmit={handleLoginSubmit}>
+                  <div className="form-group">
+                    <label htmlFor="loginEmail">Email</label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="loginEmail"
+                      name="email"
+                      value={loginData.email}
+                      onChange={(e) =>
+                        setLoginData({ ...loginData, email: e.target.value })
+                      }
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="loginPassword">Password</label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      id="loginPassword"
+                      name="password"
+                      value={loginData.password}
+                      onChange={(e) =>
+                        setLoginData({ ...loginData, password: e.target.value })
+                      }
+                      required
+                    />
+                  </div>
+                  <button type="submit" className="btn btn-success mt-3">
+                    Accedi
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modale di Registrazione */}
+      {isRegisterModalVisible && (
+        <div
+          className="modal show registration-modal"
+          tabIndex="-1"
+          role="dialog">
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content">
+              <button
+                type="button"
+                className="btn-close modal-close-button"
+                aria-label="Close"
+                onClick={() => setIsRegisterModalVisible(false)}
               />
               <div className="modal-header">
                 <h5 className="modal-title">Devi registrarti per proseguire</h5>
