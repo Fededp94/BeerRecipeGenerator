@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { jsPDF } from "jspdf";
+import axios from "axios";
+import { useAuth } from "../AuthContext/AuthContext.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./LeMieRicette.css";
 import "../App/App.css";
@@ -9,36 +11,45 @@ const LeMieRicette = () => {
   const navigate = useNavigate();
   const [recipes, setRecipes] = useState([]);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const { user } = useAuth();
 
   useEffect(() => {
-    // Funzione per caricare le ricette dal backend
     const fetchRecipes = async () => {
       try {
-        const response = await fetch("/api/recipes/user"); // Recupera le ricette dell'utente autenticato
-        if (response.ok) {
-          const data = await response.json();
-          setRecipes(data);
-        } else {
-          console.error("Errore durante il caricamento delle ricette");
+        const response = await axios({
+          method: "get",
+          url: "http://localhost:8080/api/recipes",
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
+
+        if (response.status === 200) {
+          setRecipes(response.data);
         }
       } catch (error) {
-        console.error("Errore durante la richiesta al server:", error);
+        console.error("Errore durante il caricamento delle ricette:", error);
       }
     };
 
-    fetchRecipes();
-  }, []);
+    if (user) {
+      fetchRecipes();
+    }
+  }, [user]);
 
   const handleDeleteRecipe = async (recipeId) => {
     try {
-      const response = await fetch(`/api/recipes/${recipeId}`, {
-        method: "DELETE",
+      const response = await axios({
+        method: "delete",
+        url: `http://localhost:8080/api/recipes/${recipeId}`,
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
       });
-      if (response.ok) {
+
+      if (response.status === 204) {
         setRecipes(recipes.filter((recipe) => recipe.id !== recipeId));
         setSelectedRecipe(null);
-      } else {
-        console.error("Errore durante la cancellazione della ricetta");
       }
     } catch (error) {
       console.error("Errore durante la cancellazione della ricetta:", error);
@@ -49,27 +60,33 @@ const LeMieRicette = () => {
     const doc = new jsPDF();
 
     doc.setFontSize(20);
-    doc.text(recipe.beerName, 20, 20);
+    doc.text(recipe.name, 20, 20);
 
     doc.setFontSize(14);
     doc.text("Malti:", 20, 40);
     let yPos = 50;
-    Object.entries(recipe.malts).forEach(([malt, weight]) => {
-      doc.text(`${malt}: ${weight} kg`, 30, yPos);
+    recipe.malts.forEach((malt) => {
+      doc.text(malt, 30, yPos);
       yPos += 10;
     });
 
     doc.text("Luppoli:", 20, yPos + 10);
     yPos += 20;
     recipe.hops.forEach((hop) => {
-      doc.text(`${hop}`, 30, yPos);
+      doc.text(hop, 30, yPos);
       yPos += 10;
     });
 
-    doc.text(`Lievito: ${recipe.yeast}`, 20, yPos + 10);
-    doc.text(`Alcool Stimato: ${recipe.estimatedAlcohol}%`, 20, yPos + 20);
+    doc.text("Lieviti:", 20, yPos + 10);
+    yPos += 20;
+    recipe.yeasts.forEach((yeast) => {
+      doc.text(yeast, 30, yPos);
+      yPos += 10;
+    });
 
-    doc.save(`${recipe.beerName.replace(/\s+/g, "_")}.pdf`);
+    doc.text(`Alcool Stimato: ${recipe.estimatedAlcohol}%`, 20, yPos + 10);
+
+    doc.save(`${recipe.name.replace(/\s+/g, "_")}.pdf`);
   };
 
   return (
@@ -85,14 +102,14 @@ const LeMieRicette = () => {
               <div className="recipes-grid">
                 {recipes.map((recipe, index) => (
                   <div
-                    key={recipe.id}
+                    key={recipe.id || index}
                     className={`recipe-card ${
                       selectedRecipe === index ? "selected" : ""
                     }`}
                     onClick={() => setSelectedRecipe(index)}>
                     <div className="recipe-card-content">
-                      <h3>{recipe.beerName}</h3>
-                      <h4>Malti: {Object.keys(recipe.malts).length}</h4>
+                      <h3>{recipe.name}</h3>
+                      <h4>Malti: {recipe.malts.length}</h4>
                       <h4>Luppoli: {recipe.hops.length}</h4>
                       <h4>Alcol: {recipe.estimatedAlcohol}%</h4>
                     </div>
@@ -115,17 +132,13 @@ const LeMieRicette = () => {
           <div className="col-md-4 recipe-details">
             {selectedRecipe !== null && (
               <div className="selected-recipe">
-                <h3>{recipes[selectedRecipe].beerName}</h3>
+                <h3>{recipes[selectedRecipe].name}</h3>
                 <div className="recipe-content">
                   <h4>Malti:</h4>
                   <ul>
-                    {Object.entries(recipes[selectedRecipe].malts).map(
-                      ([malt, weight]) => (
-                        <li key={malt}>
-                          {malt}: {weight} kg
-                        </li>
-                      )
-                    )}
+                    {recipes[selectedRecipe].malts.map((malt, index) => (
+                      <li key={index}>{malt}</li>
+                    ))}
                   </ul>
                   <h4>Luppoli:</h4>
                   <ul>
@@ -133,9 +146,12 @@ const LeMieRicette = () => {
                       <li key={index}>{hop}</li>
                     ))}
                   </ul>
-                  <p>
-                    <strong>Lievito:</strong> {recipes[selectedRecipe].yeast}
-                  </p>
+                  <h4>Lieviti:</h4>
+                  <ul>
+                    {recipes[selectedRecipe].yeasts.map((yeast, index) => (
+                      <li key={index}>{yeast}</li>
+                    ))}
+                  </ul>
                   <p>
                     <strong>Alcool Stimato:</strong>{" "}
                     {recipes[selectedRecipe].estimatedAlcohol}%

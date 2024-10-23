@@ -38,12 +38,11 @@ const ResultPage = () => {
       Object.entries(maltWeights).filter(([_, weight]) => weight !== "")
     );
 
-    // Cambia beerName in name per corrispondere al backend
     setFinalRecipe({
-      name: beerName, // Modifica da beerName a name
-      malts: Object.keys(scaledWeights), // Invio solo gli ID (nomi) dei malti
-      hops: hops, // Lista di ID (nomi) luppoli
-      yeasts: [yeast], // Lista contenente il lievito (in backend è 'yeasts')
+      name: beerName,
+      malts: Object.keys(scaledWeights),
+      hops: hops,
+      yeasts: [yeast],
       estimatedAlcohol: calculateAlcoholContent(scaledWeights),
     });
   };
@@ -65,7 +64,6 @@ const ResultPage = () => {
       return;
     }
 
-    // Log dei dati che stiamo per inviare
     const requestData = {
       name: finalRecipe.name,
       malts: finalRecipe.malts,
@@ -74,8 +72,6 @@ const ResultPage = () => {
       estimatedAlcohol: finalRecipe.estimatedAlcohol,
       userEmail: user.email,
     };
-
-    console.log("Dati da inviare:", requestData);
 
     try {
       const response = await axios({
@@ -86,24 +82,19 @@ const ResultPage = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${user.token}`,
         },
-        withCredentials: true,
+        withCredentials: false,
       });
-
-      console.log("Risposta ricevuta:", response);
 
       if (response.status === 201 || response.status === 200) {
         alert("Ricetta salvata con successo nel database!");
       }
     } catch (error) {
-      console.error("Errore completo:", error);
       if (error.response) {
-        console.error("Dati risposta errore:", error.response.data);
-        console.error("Status errore:", error.response.status);
+        alert(
+          "Errore nel salvataggio della ricetta: " +
+            (error.response?.data?.message || error.message)
+        );
       }
-      alert(
-        "Errore nel salvataggio della ricetta: " +
-          (error.response?.data?.message || error.message)
-      );
     }
   };
 

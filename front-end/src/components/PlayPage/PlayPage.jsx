@@ -100,12 +100,12 @@ const PlayPage = () => {
       type: "Luppoli Base",
       hops: [
         {
-          name: "Saaz",
-          description: "Luppolo aromatico con note erbacee e speziate",
+          name: "Tettnang",
+          description: "Luppolo nobile tedesco con note floreali e speziate",
         },
         {
-          name: "Styrian Golding",
-          description: "Noto per il suo profilo floreale e dolce",
+          name: "Fuggle",
+          description: "Classico luppolo inglese con note erbacee e terrose",
         },
         {
           name: "Hallertau Magnum",
@@ -185,7 +185,7 @@ const PlayPage = () => {
       else if (prev.length < 3) return [...prev, malto];
       return prev;
     });
-    setError(""); // Resetta l'errore quando l'utente seleziona un malto
+    setError("");
   };
 
   const handleHopsChange = (luppolo) => {
@@ -194,16 +194,15 @@ const PlayPage = () => {
       else if (prev.length < 4) return [...prev, luppolo];
       return prev;
     });
-    setError(""); // Resetta l'errore quando l'utente seleziona un luppolo
+    setError("");
   };
 
   const handleYeastChange = (lievito) => {
     setSelectedYeast(lievito);
-    setError(""); // Resetta l'errore quando l'utente seleziona un lievito
+    setError("");
   };
 
   const handleGenerateClick = () => {
-    // Resetta eventuali errori precedenti
     setError("");
 
     // Verifico che tutti gli ingredienti necessari siano stati selezionati
@@ -218,7 +217,7 @@ const PlayPage = () => {
       if (!selectedYeast) errorMessage += "\n- Almeno un lievito";
 
       setError(errorMessage);
-      return; // Esce dalla funzione senza navigare
+      return;
     }
 
     // Se tutti i controlli passano, naviga alla pagina successiva
@@ -421,8 +420,7 @@ const PlayPage = () => {
                               className="info-container"
                               data-bs-toggle="tooltip"
                               data-bs-placement="top"
-                              title={y.description} //Devo usare y per il tooltip
-                            >
+                              title={y.description}>
                               <FontAwesomeIcon
                                 icon={faCircleInfo}
                                 className="info-icon"
