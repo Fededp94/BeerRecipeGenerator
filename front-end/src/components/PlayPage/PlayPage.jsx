@@ -239,7 +239,6 @@ const PlayPage = () => {
       return new window.bootstrap.Tooltip(tooltipTriggerEl);
     });
 
-    // Cleanup dei tooltip
     return () => {
       tooltipList.forEach((tooltip) => tooltip.dispose());
     };

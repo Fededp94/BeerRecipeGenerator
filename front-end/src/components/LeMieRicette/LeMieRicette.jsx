@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { jsPDF } from "jspdf";
 import axios from "axios";
 import { useAuth } from "../AuthContext/AuthContext.jsx";
+import { generateRecipePDF } from "../Pdf/Pdf.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./LeMieRicette.css";
 import "../App/App.css";
@@ -25,7 +26,6 @@ const LeMieRicette = () => {
         });
 
         if (response.status === 200) {
-          // Recupero i pesi dei malti dalla sessionStorage
           const recipesWithWeights = response.data.map((recipe) => {
             const maltWeights = JSON.parse(
               sessionStorage.getItem(`recipe-${recipe.id}-weights`) || "{}"
@@ -173,7 +173,7 @@ const LeMieRicette = () => {
                   </p>
                   <button
                     className="btn btn-primary"
-                    onClick={() => generatePDF(recipes[selectedRecipe])}>
+                    onClick={() => generateRecipePDF(recipes[selectedRecipe])}>
                     Scarica PDF
                   </button>
                 </div>

@@ -76,7 +76,7 @@ body {
   opacity: 1;
 }
 
-/* Button */
+/* Bottone start */
 .start-button-container {
   display: flex;
   justify-content: center;
@@ -208,7 +208,7 @@ input:focus {
   border: none;
 }
 
-/* Button Le mie ricette */
+/* Buttone Le mie ricette */
 .custom-btn {
   font-family: sans-serif;
   font-weight: 600;
