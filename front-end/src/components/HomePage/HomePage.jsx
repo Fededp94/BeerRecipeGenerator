@@ -82,7 +82,6 @@ const HomePage = () => {
 
         login(userData);
         setIsRegisterModalVisible(false);
-        alert("Registrazione completata con successo!");
       }
     } catch (error) {
       console.error("Errore dettagliato:", error);
@@ -136,7 +135,6 @@ const HomePage = () => {
         };
         login(userData);
         setIsLoginModalVisible(false);
-        alert("Login effettuato con successo!");
       }
     } catch (error) {
       console.error("Errore durante il login:", error);
@@ -261,7 +259,7 @@ const HomePage = () => {
                     <label htmlFor="loginEmail">Email</label>
                     <input
                       type="email"
-                      className="form-control"
+                      className="form-control custom-input"
                       id="loginEmail"
                       name="email"
                       value={loginData.email}
@@ -275,7 +273,7 @@ const HomePage = () => {
                     <label htmlFor="loginPassword">Password</label>
                     <input
                       type="password"
-                      className="form-control"
+                      className="form-control custom-input"
                       id="loginPassword"
                       name="password"
                       value={loginData.password}
@@ -318,7 +316,7 @@ const HomePage = () => {
                     <label htmlFor="firstName">Iniziamo dal nome</label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="form-control custom-input"
                       id="firstName"
                       name="firstName"
                       value={formData.firstName}
@@ -330,7 +328,7 @@ const HomePage = () => {
                     <label htmlFor="lastName">Ora il cognome</label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="form-control custom-input"
                       id="lastName"
                       name="lastName"
                       value={formData.lastName}
@@ -344,7 +342,7 @@ const HomePage = () => {
                     </label>
                     <input
                       type="email"
-                      className="form-control"
+                      className="form-control custom-input"
                       id="email"
                       name="email"
                       value={formData.email}
@@ -358,7 +356,7 @@ const HomePage = () => {
                     </label>
                     <input
                       type="password"
-                      className="form-control"
+                      className="form-control custom-input"
                       id="password"
                       name="password"
                       value={formData.password}

@@ -9,9 +9,9 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
     if (savedUser) {
-      setUser(JSON.parse(savedUser));
-      // Configura axios con il token salvato
       const userData = JSON.parse(savedUser);
+      setUser(userData);
+
       if (userData?.token) {
         axios.defaults.headers.common[
           "Authorization"
@@ -20,11 +20,16 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  const login = (userData) => {
+  const login = (responseData) => {
+    const userData = {
+      email: responseData.email,
+      token: responseData.token,
+    };
+
     setUser(userData);
     localStorage.setItem("user", JSON.stringify(userData));
-    // Imposta il token nell'header di default per axios
-    if (userData?.token) {
+
+    if (userData.token) {
       axios.defaults.headers.common[
         "Authorization"
       ] = `Bearer ${userData.token}`;
@@ -34,7 +39,6 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     localStorage.removeItem("user");
-    // Rimuovi il token dall'header di default per axios
     delete axios.defaults.headers.common["Authorization"];
   };
 

@@ -25,7 +25,17 @@ const LeMieRicette = () => {
         });
 
         if (response.status === 200) {
-          setRecipes(response.data);
+          // Recupero i pesi dei malti dalla sessionStorage
+          const recipesWithWeights = response.data.map((recipe) => {
+            const maltWeights = JSON.parse(
+              sessionStorage.getItem(`recipe-${recipe.id}-weights`) || "{}"
+            );
+            return {
+              ...recipe,
+              maltWeights,
+            };
+          });
+          setRecipes(recipesWithWeights);
         }
       } catch (error) {
         console.error("Errore durante il caricamento delle ricette:", error);
@@ -48,6 +58,7 @@ const LeMieRicette = () => {
       });
 
       if (response.status === 204) {
+        sessionStorage.removeItem(`recipe-${recipeId}-weights`);
         setRecipes(recipes.filter((recipe) => recipe.id !== recipeId));
         setSelectedRecipe(null);
       }
@@ -66,7 +77,8 @@ const LeMieRicette = () => {
     doc.text("Malti:", 20, 40);
     let yPos = 50;
     recipe.malts.forEach((malt) => {
-      doc.text(malt, 30, yPos);
+      const weight = recipe.maltWeights[malt] || "0";
+      doc.text(`${malt} - ${weight}kg`, 30, yPos);
       yPos += 10;
     });
 
@@ -137,7 +149,10 @@ const LeMieRicette = () => {
                   <h4>Malti:</h4>
                   <ul>
                     {recipes[selectedRecipe].malts.map((malt, index) => (
-                      <li key={index}>{malt}</li>
+                      <li key={index} className="malt-item">
+                        {malt} -{" "}
+                        {recipes[selectedRecipe].maltWeights[malt] || "0"}kg
+                      </li>
                     ))}
                   </ul>
                   <h4>Luppoli:</h4>

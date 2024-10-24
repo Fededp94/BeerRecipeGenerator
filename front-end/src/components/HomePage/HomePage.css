@@ -149,6 +149,11 @@ body {
   color: #333333;
 }
 
+.custom-input {
+  font-family: sans-serif;
+  color: white;
+}
+
 .form-control {
   background-color: #333333;
   border: none;

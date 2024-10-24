@@ -86,6 +86,14 @@ const ResultPage = () => {
       });
 
       if (response.status === 201 || response.status === 200) {
+        const recipeId = response.data.id;
+        if (recipeId) {
+          sessionStorage.setItem(
+            `recipe-${recipeId}-weights`,
+            JSON.stringify(maltWeights)
+          );
+        }
+
         alert("Ricetta salvata con successo nel database!");
       }
     } catch (error) {
