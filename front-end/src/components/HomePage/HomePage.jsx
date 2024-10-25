@@ -12,7 +12,7 @@ const HomePage = () => {
   const [isRegisterModalVisible, setIsRegisterModalVisible] = useState(false);
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
-  const [showLogo, setShowLogo] = useState(false); // Aggiunto qui lo state per il logo
+  const [showLogo, setShowLogo] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",

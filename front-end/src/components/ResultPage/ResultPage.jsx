@@ -94,7 +94,7 @@ const ResultPage = () => {
           );
         }
 
-        alert("Ricetta salvata con successo nel database!");
+        alert("Ricetta salvata con successo!");
       }
     } catch (error) {
       if (error.response) {
